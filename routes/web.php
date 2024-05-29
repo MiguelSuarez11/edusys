@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/cursos', CursoController::class);
     Route::resource('/asignaturas', AsignaturasController::class);
 
+
 });
 
 //Rutas de Configuracion de Perfil
@@ -53,10 +54,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Rutas de profesores 
+//Rutas de profesores
 Route::middleware('auth')->group(function () {
 Route::get('/profesores', [CalificacionesController::class, 'index'])->name('profesor.index');
 Route::POST('/profesores.store', [CalificacionesController::class, 'store'])->name('profesor.store');
 
+
+Route::resource('calificaciones', CalificacionesController::class);
 });
+
 require __DIR__.'/auth.php';

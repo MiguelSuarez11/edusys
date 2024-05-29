@@ -17,7 +17,7 @@ class Calificacion extends Model
         'nota_definitiva'
     ];
 
-    
+
 
     public $timestamp=false;
     public function estudiante()
@@ -29,7 +29,7 @@ class Calificacion extends Model
         return $this->hasOne(materias::class, "materia_id", "id");
     }
 
-    
+
 
     public function curso()
     {
@@ -41,5 +41,7 @@ class Calificacion extends Model
         return $this->hasOne(Personal::class , 'id' , 'personal_id');
     }
 
-   
+    
+
+
 }

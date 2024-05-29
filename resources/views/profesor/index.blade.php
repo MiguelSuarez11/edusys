@@ -10,13 +10,18 @@
         <br>
         <h3>Registro de Notas</h3>
 
-        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#create">
-            Nuevo Registro
-        </button>
+
+
+        <div class="float-right">
+            <a href="{{route('calificaciones.create')}}" class="float-right btn btn-info btn-sm" data-placement="left">
+                {{ __('Registar Calificacion') }}
+            </a>
+
+        </div>
         <br>
-        
-      
-        <div class="table-responsive mt-3">
+
+
+        <div class="mt-3 table-responsive">
             <table class="table table-bordered table-striped">
                 <thead class="thead">
                     <tr>
@@ -41,10 +46,10 @@
                             <td>{{$calificacion->observaciones}}</td>
                         </tr>
                     </tbody>
-                   
+
                 </table>
             </div>
-                    
+
 
                 </tbody>
                 @endforeach

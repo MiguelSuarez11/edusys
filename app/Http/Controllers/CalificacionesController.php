@@ -22,11 +22,12 @@ class CalificacionesController extends Controller
     public function index()
     {
         $personal = Personal::where('');
+        $tiposCursos = Curso::pluck('nombre', 'id');
         $cursos = Curso::all();
         $asignaturas = Asignatura::all();
         $estudiantes = User::with('personal');
         $calificaciones = Calificacion::all();
-        return view("profesor.index", compact('cursos', 'asignaturas', 'estudiantes', 'personal','calificaciones'));
+        return view("profesor.index", compact('cursos', 'asignaturas', 'estudiantes', 'personal','calificaciones' , 'tiposCursos'));
         //
     }
 
@@ -35,17 +36,18 @@ class CalificacionesController extends Controller
      */
     public function create()
     {
-        //
+        $cursos = Curso::all();
+        return view('profesor.create', compact('cursos'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    
-     
+
+
 
 public function store(Request $request)
-{   
+{
     // Recuperar la persona basada en el nombre (suponiendo que se envía el nombre en la solicitud)
     $nombre = $request->input('nombre');
 
@@ -64,20 +66,20 @@ public function store(Request $request)
     $calificacion->nota_3 = $request->input('nota3');
     $calificacion->nota_4 = $request->input('nota4');
     $calificacion->nota_definitiva = ($request->input('nota1') * 0.25) + ($request->input('nota2') * 0.25) + ($request->input('nota3') * 0.25) + ($request->input('nota4') * 0.25);
-    
+
     // Asignar la persona asociada a la calificación
     $calificacion->persona()->associate($persona);
 
-    
+
     // Guardar la calificación
     $calificacion->save();
 
-   
+
 
     return redirect()->back()->with('success', 'Calificación guardada correctamente.');
 }
 
-     
+
 
     /**
      * Display the specified resource.
