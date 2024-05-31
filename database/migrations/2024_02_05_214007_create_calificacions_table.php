@@ -19,6 +19,8 @@ return new class extends Migration
             $table->float('periodo_3')->nullable();
             $table->float('periodo_4')->nullable();
             $table->float('nota_final')->nullable();
+            $table->unsignedSmallInteger('asignatura_id');
+            $table->foreign('asignatura_id')->references('id')->on('asignaturas');
             $table->foreign('personal_id')->references('id')->on('personals');
             $table->boolean('estado')->default(1)->nullable();
             $table->timestamps();

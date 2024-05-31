@@ -122,34 +122,72 @@ class CalificacionesController extends Controller
         $calificaciones->save();
 
 
-        // Crear una nueva calificación
-        $calificacion = new Calificacion();
-        $calificacion->personal_id = $request->estudiantes;
+        // Buscar una calificación existente por personal_id y asignatura_id
+        $calificacion = Calificacion::where('personal_id', $request->estudiantes)
+            ->where('asignatura_id', $request->asignatura)
+            ->first();
 
-        // Asignar la nota al periodo correspondiente
-        switch ($request->periodo) {
-            case 1:
-                $calificacion->periodo_1 = $request->definitiva;
-                break;
-            case 2:
-                $calificacion->periodo_2 = $request->definitiva;
-                break;
-            case 3:
-                $calificacion->periodo_3 = $request->definitiva;
-                break;
-            case 4:
-                $calificacion->periodo_4 = $request->definitiva;
-                break;
+        if ($calificacion) {
+            // Actualizar el campo del periodo correspondiente
+            switch ($request->periodo) {
+                case 1:
+                    $calificacion->periodo_1 = $request->definitiva;
+                    break;
+                case 2:
+                    $calificacion->periodo_2 = $request->definitiva;
+                    break;
+                case 3:
+                    $calificacion->periodo_3 = $request->definitiva;
+                    break;
+                case 4:
+                    $calificacion->periodo_4 = $request->definitiva;
+                    break;
+            }
+
+            // Recalcular la nota final
+            $calificacion->nota_final = $this->calcularNotaFinal($calificacion);
+        } else {
+            // Crear una nueva calificación
+            $calificacion = new Calificacion();
+            $calificacion->personal_id = $request->estudiantes;
+            $calificacion->asignatura_id = $request->asignatura;
+
+            switch ($request->periodo) {
+                case 1:
+                    $calificacion->periodo_1 = $request->definitiva;
+                    break;
+                case 2:
+                    $calificacion->periodo_2 = $request->definitiva;
+                    break;
+                case 3:
+                    $calificacion->periodo_3 = $request->definitiva;
+                    break;
+                case 4:
+                    $calificacion->periodo_4 = $request->definitiva;
+                    break;
+            }
+
+            $calificacion->nota_final = $request->definitiva;
         }
-
-        // Guardar la nota final
-        $calificacion->nota_final = $request->definitiva;
 
         // Guardar la calificación en la base de datos
         $calificacion->save();
 
         // Redireccionar a una página de éxito o mostrar un mensaje de éxito
         return redirect()->route('profesor.index')->with('success', 'Calificación guardada con éxito.');
+    }
+
+    private function calcularNotaFinal($calificacion)
+    {
+        $notas = [$calificacion->periodo_1, $calificacion->periodo_2, $calificacion->periodo_3, $calificacion->periodo_4];
+        $notasValidas = array_filter($notas, function($nota) {
+            return !is_null($nota);
+        });
+
+        $suma = array_sum($notasValidas);
+        $totalNotas = count($notasValidas);
+
+        return $totalNotas > 0 ? $suma / $totalNotas : 0;
     }
 
     /**
