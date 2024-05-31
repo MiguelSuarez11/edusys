@@ -132,7 +132,7 @@
                                     '<td>' + estudiante.nombres + '</td>' +
                                     '<td>' + estudiante.correo + '</td>' +
                                     '<td>' +
-                                    '<a class="" href="/ruta-a-tu-formulario-de-edicion/' + + '">' +
+                                    '<a class="" href="/estudiantess/index' + estudiante.id + '">' +
                                     '<i class="far fa-eye"></i>' +
                                     '</a>' +
                                     '</td>' +
