@@ -58,5 +58,47 @@ class Encabezado_detTableSeeder extends Seeder
             'nombre' => 'Cuarto',
             'nomenclatura'=>'4º'
         ]);
+
+        encabezados_det::create([
+            'encabezados_id' => '4',
+            'nombre' => 'lunes',
+            'nomenclatura'=>'lun'
+        ]);
+
+        encabezados_det::create([
+            'encabezados_id' => '4',
+            'nombre' => 'martes',
+            'nomenclatura'=>'mart'
+        ]);
+
+        encabezados_det::create([
+            'encabezados_id' => '4',
+            'nombre' => 'miercoles',
+            'nomenclatura'=>'mier'
+        ]);
+
+        encabezados_det::create([
+            'encabezados_id' => '4',
+            'nombre' => 'jueves',
+            'nomenclatura'=>'juev'
+        ]);
+
+        encabezados_det::create([
+            'encabezados_id' => '4',
+            'nombre' => 'viernes',
+            'nomenclatura'=>'vier'
+        ]);
+
+        encabezados_det::create([
+            'encabezados_id' => '4',
+            'nombre' => 'sabado',
+            'nomenclatura'=>'sab'
+        ]);
+
+        encabezados_det::create([
+            'encabezados_id' => '4',
+            'nombre' => 'domingos',
+            'nomenclatura'=>'dom'
+        ]);
     }
 }

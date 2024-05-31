@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,13 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materias', function (Blueprint $table) {
-            $table->smallIncrements('id')->unsigned();
-            $table->string('nombre');
-            $table->string('descrpcion');
-            $table->boolean('estado')->default(1);
-            $table->timestamps();
-        });
+        DB::statement('DROP VIEW IF EXISTS vs_genero');
+        DB::statement('CREATE VIEW vs_horario AS SELECT id, nombre,nomenclatura FROM encabezados_dets WHERE encabezados_id = 4');
+        
+        //
     }
 
     /**
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materias');
+        DB::statement('DROP VIEW IF EXISTS vs_horario');
     }
 };

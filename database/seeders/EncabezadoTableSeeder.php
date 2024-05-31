@@ -23,5 +23,9 @@ class EncabezadoTableSeeder extends Seeder
         encabezados::create([
             'nombre'=>'trimestre',  
         ]);
+
+        encabezados::create([
+            'nombre'=>'dia_semana',  
+        ]);
     }
 }
