@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('calificacionesss', function (Blueprint $table) {
+        Schema::create('calificaciones', function (Blueprint $table) {
             $table->smallIncrements('id')->unsigned();
             $table->unsignedSmallInteger('personal_id');
-            $table->unsignedSmallInteger('materia_id');
+            $table->unsignedSmallInteger('asignatura_id');
             $table->float('nota_1')->default(0);
             $table->float('nota_2')->default(0);
             $table->float('nota_3')->default(0);
@@ -23,9 +23,11 @@ return new class extends Migration
             $table->text('observaciones')->nullable();
             $table->boolean('estado')->default(1);
             $table->unsignedSmallInteger('curso_id');
+            $table->unsignedBigInteger('periodo_id');
             $table->foreign('personal_id')->references('id')->on('personals');
-            $table->foreign('materia_id')->references('id')->on('materias');
+            $table->foreign('asignatura_id')->references('id')->on('asignaturas');
             $table->foreign('curso_id')->references('id')->on('cursos');
+            $table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('cascade');
             $table->timestamps();
         });
     }

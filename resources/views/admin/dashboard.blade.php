@@ -42,7 +42,7 @@
 @endcan
 @can('teacher.dashboard')
 <div class="row">
-  
+
 
     <div class="col-md-3">
         <x-adminlte-small-box title="{{$cursos}}" text="Cursos" icon="fas fa-school text-black"

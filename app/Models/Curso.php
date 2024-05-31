@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Curso extends Model
 {
-    
+
     static $rules = [
 		'nombre' => 'required',
 		'nomenclatura' => 'required',
@@ -41,11 +41,11 @@ class Curso extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function calificaciones()
-    {
-        return $this->hasMany('App\Models\Calificacione', 'curso_id', 'id');
-    }
-    
+    // public function calificaciones()
+    // {
+    //     return $this->hasMany('App\Models\Calificacione', 'curso_id', 'id');
+    // }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -53,7 +53,7 @@ class Curso extends Model
     {
         return $this->hasMany('App\Models\HorarioCurso', 'curso_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -61,6 +61,11 @@ class Curso extends Model
     {
         return $this->hasMany('App\Models\Personal', 'curso_id', 'id');
     }
-    
+
+    public function calificaciones()
+    {
+        return $this->hasMany(Calificacione::class );
+    }
+
 
 }

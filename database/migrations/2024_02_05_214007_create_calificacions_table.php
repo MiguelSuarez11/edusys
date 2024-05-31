@@ -14,18 +14,13 @@ return new class extends Migration
         Schema::create('calificacions', function (Blueprint $table) {
             $table->smallIncrements('id')->unsigned();
             $table->unsignedSmallInteger('personal_id');
-            $table->unsignedSmallInteger('materia_id');
-            $table->float('nota_1')->default(0);
-            $table->float('nota_2')->default(0);
-            $table->float('nota_3')->default(0);
-            $table->float('nota_4')->default(0);
-            $table->float('nota_definitiva')->default(0);
-            $table->text('observaciones')->nullable();
-            $table->boolean('estado')->default(1);
-            $table->unsignedSmallInteger('curso_id');
+            $table->float('periodo_1')->nullable();
+            $table->float('periodo_2')->nullable();
+            $table->float('periodo_3')->nullable();
+            $table->float('periodo_4')->nullable();
+            $table->float('nota_final')->nullable();
             $table->foreign('personal_id')->references('id')->on('personals');
-            $table->foreign('materia_id')->references('id')->on('materias');
-            $table->foreign('curso_id')->references('id')->on('cursos');
+            $table->boolean('estado')->default(1)->nullable();
             $table->timestamps();
         });
     }

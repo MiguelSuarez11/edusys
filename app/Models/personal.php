@@ -90,10 +90,12 @@ class Personal extends Model
         return $this->user->roles();
     }
 
-    
+
 
     public function calificaciones()
     {
-        return $this->hasMany(Calificacion::class);
+        return $this->hasMany(Calificacione::class);
     }
+
+  
 }

@@ -18,14 +18,14 @@ class adminController extends Controller
 
     public function index()
     {
-        $response = Http::get('https://frasedeldia.azurewebsites.net/api/phrase');
-        $data = $response->json();
+         $response = Http::get('https://frasedeldia.azurewebsites.net/api/phrase');
+         $data = $response->json();
         $personalR = Personal::where('estado', 1)->count();
         $users = User::where('estado', 1)->count();
         $cursos = Curso::where('estado', 1)->count();
         $calificacione = Calificacion::where('estado',1)->count();
 
-
         return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione'));
+        //return view('admin.dashboard', compact( 'personalR', 'users', 'cursos', 'calificacione'));
     }
 }

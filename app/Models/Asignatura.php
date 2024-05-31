@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Asignatura extends Model
 {
     use HasFactory;
-    
+
     static $rules = [
 		'nombre' => 'required',
 		'nomenclatura' => 'required',
@@ -22,4 +22,10 @@ class Asignatura extends Model
      * @var array
      */
     protected $fillable = ['nombre','nomenclatura','estado'];
+
+
+    public function calificaciones()
+    {
+        return $this->hasMany(Calificacione::class);
+    }
 }

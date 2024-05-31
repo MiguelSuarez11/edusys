@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class calificacione extends Model
+class Calificacion extends Model
 {
     use HasFactory;
-
 
     protected $fillable=[
         'nota_1',
@@ -30,11 +29,6 @@ class calificacione extends Model
         return $this->hasOne(materias::class, "materia_id", "id");
     }
 
-    public function asignaturas()
-    {
-        return $this->hasOne(Asignatura::class, "asignatura_id", "id");
-    }
-
 
 
     public function curso()
@@ -44,13 +38,10 @@ class calificacione extends Model
 
     public function personal()
     {
-        return $this->hasOne(Personal::class , 'personal_id' , 'id');
+        return $this->hasOne(Personal::class , 'personal_id' , 'personal_id');
     }
 
-    public function tipoDocumento()
-    {
-        return $this->hasOne(Periodo::class, 'periodo_id', 'id');
-    }
+
 
 
 }

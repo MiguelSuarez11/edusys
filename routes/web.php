@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\AsignaturasController;
 use App\Http\Controllers\CalificacionesController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\DependentDropdownController;
 use App\Http\Controllers\estudianteController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\PersonalController;
@@ -43,8 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/personal', PersonalController::class);
     Route::resource('/cursos', CursoController::class);
     Route::resource('/asignaturas', AsignaturasController::class);
-
-
 });
 
 //Rutas de Configuracion de Perfil
@@ -56,11 +55,30 @@ Route::middleware('auth')->group(function () {
 
 //Rutas de profesores
 Route::middleware('auth')->group(function () {
-Route::get('/profesores', [CalificacionesController::class, 'index'])->name('profesor.index');
-Route::POST('/profesores.store', [CalificacionesController::class, 'store'])->name('profesor.store');
+    Route::get('/profesores', [CalificacionesController::class, 'index'])->name('profesor.index');
+    Route::post('/profesor/store', [CalificacionesController::class, 'store'])->name('profesor.store');
 
 
-Route::resource('calificaciones', CalificacionesController::class);
+
+
+
+    Route::resource('calificaciones', CalificacionesController::class);
 });
 
-require __DIR__.'/auth.php';
+Route::get('/categories', [DependentDropdownController::class, 'getCategories'])->name('categories.index');
+Route::get('/subcategories/{categoryId}', [DependentDropdownController::class, 'getSubcategories'])->name('subcategories.index');
+
+// Cursos y estudiantes
+Route::get('/cursoss', [DependentDropdownController::class, 'getCursos'])->name('cursoss.index');
+Route::get('/estudiantes/{cursoId}', [DependentDropdownController::class, 'getEstudiantes'])->name('estudiantes.index');
+
+
+Route::get('/form', [DependentDropdownController::class, 'showForm'])->name('form.show');
+
+
+// Route::get('/categories', [CalificacionesController::class, 'getCategories'])->name('categories.index');
+// Route::get('/subcategories/{categoryId}', [CalificacionesController::class, 'getSubcategories'])->name('subcategories.index');
+// Route::get('/form', [CalificacionesController::class, 'showForm'])->name('form.show');
+
+
+require __DIR__ . '/auth.php';

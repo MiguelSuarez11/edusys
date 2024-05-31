@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action=""  role="form" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('profesor.store') }}" role="form" enctype="multipart/form-data">
                             @csrf
                             @include('profesor.form')
                             <div class="box-footer mt20">
