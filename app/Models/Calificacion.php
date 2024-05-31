@@ -9,6 +9,7 @@ class Calificacion extends Model
 {
     use HasFactory;
 
+
     protected $table = 'calificacions';
 
 
