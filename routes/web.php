@@ -62,23 +62,22 @@ Route::middleware('auth')->group(function () {
 
 
 
+
+
     Route::resource('calificaciones', CalificacionesController::class);
 });
 
-Route::get('/categories', [DependentDropdownController::class, 'getCategories'])->name('categories.index');
-Route::get('/subcategories/{categoryId}', [DependentDropdownController::class, 'getSubcategories'])->name('subcategories.index');
 
 // Cursos y estudiantes
 Route::get('/cursoss', [DependentDropdownController::class, 'getCursos'])->name('cursoss.index');
 Route::get('/estudiantes/{cursoId}', [DependentDropdownController::class, 'getEstudiantes'])->name('estudiantes.index');
 
+Route::get('/profesor/estudiantes/{curso}', [CalificacionesController::class, 'getEstudiantesByCurso'])->name('profesor.getEstudiantesByCurso');
 
-Route::get('/form', [DependentDropdownController::class, 'showForm'])->name('form.show');
 
 
-// Route::get('/categories', [CalificacionesController::class, 'getCategories'])->name('categories.index');
-// Route::get('/subcategories/{categoryId}', [CalificacionesController::class, 'getSubcategories'])->name('subcategories.index');
-// Route::get('/form', [CalificacionesController::class, 'showForm'])->name('form.show');
+
+
 
 
 require __DIR__ . '/auth.php';
