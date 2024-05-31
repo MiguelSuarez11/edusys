@@ -25,10 +25,7 @@ class calificacione extends Model
     {
         return $this->hasOne(Personal::class, "personal_id", "id");
     }
-    public function materia()
-    {
-        return $this->hasOne(materias::class, "materia_id", "id");
-    }
+   
 
     public function asignaturas()
     {
@@ -42,7 +39,7 @@ class calificacione extends Model
         return $this->hasOne(Curso::class, "curso_id", "id");
     }
 
-    public function personal()
+    public function personals()
     {
         return $this->hasOne(Personal::class , 'personal_id' , 'id');
     }
@@ -52,5 +49,9 @@ class calificacione extends Model
         return $this->hasOne(Periodo::class, 'periodo_id', 'id');
     }
 
+    public function personal()
+    {
+        return $this->belongsTo(Personal::class, 'personal_id');
+    }
 
 }

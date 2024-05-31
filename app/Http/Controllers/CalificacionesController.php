@@ -36,14 +36,21 @@ class CalificacionesController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+       
         $calificacions = new Calificacione();
         $cursos = Curso::all();
         $periodos = Periodo::pluck('nombre', 'id');
         $asignaturas = Asignatura::pluck('nombre', 'id');
-        return view('profesor.create', compact('categories', 'cursos', 'calificacions', 'asignaturas', 'periodos'));
+        return view('profesor.create', compact( 'cursos', 'calificacions', 'asignaturas', 'periodos'));
     }
-
+    public function mostrarAsig()
+    {
+        //Muestra de notas a los estudiantes
+        $asignaturas = Asignatura::all();
+        $estudiantes = User::with('personal');
+        $calificaciones = Calificacion::all();
+        return view('estudiantes.index', compact('asignaturas', 'estudiantes', 'calificaciones'));
+    } 
 
 
     public function store(Request $request)
@@ -151,6 +158,29 @@ class CalificacionesController extends Controller
         // Retornar la respuesta como JSON
         return response()->json($estudiantes);
     }
+
+    public function getEstudiantesByAsig($AsigId)
+    {
+        // $estudiantes = Calificacion::where('asignatura_id', $AsigId)->get();
+        
+
+        $estudiantes = Calificacion::with('personal')
+        ->where('asignatura_id', $AsigId)
+        ->get();
+        return response()->json($estudiantes );
+    }
+
+    public function getCalificaciones()
+{
+    $calificaciones = Calificacion::with('personal')->get();
+    return response()->json($calificaciones, 200, [], JSON_PRETTY_PRINT);
+}
+
+    public function getEstudiantes()
+{
+    $estudiantes = calificacione::with('personal_id')->get();
+    return response()->json($estudiantes);
+}
 
     /**
      * Display the specified resource.

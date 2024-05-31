@@ -40,14 +40,8 @@ class Calificacion extends Model
 
 
     public $timestamp=false;
-    // public function estudiante()
-    // {
-    //     return $this->hasOne(Personal::class, "personal_id", "id");
-    // }
-    public function materia()
-    {
-        return $this->hasOne(materias::class, "materia_id", "id");
-    }
+  
+  
 
 
 
@@ -56,9 +50,11 @@ class Calificacion extends Model
     //     return $this->hasOne(Curso::class, "curso_id", "id");
     // }
 
+    
+
     public function personal()
     {
-        return $this->hasOne(Personal::class , 'id' , 'personal_id');
+        return $this->belongsTo(Personal::class, 'personal_id');
     }
 
 

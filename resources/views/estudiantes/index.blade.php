@@ -39,12 +39,7 @@
                         <div class="float-right">
                             <a class="btn btn-primary" href="{{ route('personal.index') }}"> {{ __('Regresar') }}</a>
                         </div>
-                        <div class="float-left">
-                            <a class="btn btn-info" href="{{ route('calificaciones.create') }}" data-placement="left">
-                                {{ __('Registar Calificacion') }}
-                            </a>
-
-                        </div>
+                       
                     </div>
 
                     <div class="card-header">
@@ -59,11 +54,11 @@
 
                             <div class="row">
                                 <div class="col-3">
-                                    <label for="curso">Curso:</label>
+                                    <label for="curso">Asignaturas:</label>
                                     <select name="curso" id="curso" class="form-control">
                                         <option value="">Seleccionar curso</option>
-                                        @foreach ($cursos as $curso)
-                                            <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
+                                        @foreach ($asignaturas as $asig)
+                                            <option value="{{ $asig->id }}">{{ $asig->nombre }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -76,7 +71,10 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nombre</th>
-                                                <th>Correo</th>
+                                                <th>Periodo 1</th>
+                                                <th>Periodo 2</th>
+                                                <th>Periodo 3</th>
+                                                <th>Periodo 4</th>
                                                 <th>Acciones</th>
 
                                             </tr>
@@ -115,24 +113,34 @@
     <script>
         $(document).ready(function () {
             $('#curso').change(function () {
-                var cursoId = $(this).val();
+                var AsigId = $(this).val();
 
-                if (cursoId) {
+                if (AsigId) {
                     $.ajax({
-                        url: '/profesor/estudiantes/' + cursoId,
+                        url: '/estudiantess/' + AsigId,
                         type: 'GET',
                         success: function (response) {
                             var estudiantesTable = $('#estudiantes-table tbody');
                             estudiantesTable.empty();
 
                             response.forEach(function (estudiante) {
+                                
+                                var periodo_1 = estudiante.periodo_1 !== null ? estudiante.periodo_1 : 'no definida';
+                                var periodo_2 = estudiante.periodo_2 !== null ? estudiante.periodo_2 : 'no definida';
+                                var periodo_3 = estudiante.periodo_3 !== null ? estudiante.periodo_3 : 'no definida';
+                                var periodo_4 = estudiante.periodo_4 !== null ? estudiante.periodo_4 : 'no definida';
+                                var nombrePersonal = estudiante.personal ? estudiante.personal.nombres : 'no definida';
                                 estudiantesTable.append(
                                     '<tr>' +
                                     '<td>' + estudiante.id + '</td>' +
-                                    '<td>' + estudiante.nombres + '</td>' +
-                                    '<td>' + estudiante.correo + '</td>' +
+                                    '<td>' + nombrePersonal + '</td>' +
+                                    
+                                    '<td>' + periodo_1 + '</td>' +
+                                    '<td>' + periodo_2 + '</td>' +
+                                    '<td>' + periodo_3 + '</td>' +
+                                    '<td>' + periodo_4 + '</td>' +
                                     '<td>' +
-                                    '<a class="" href="/ruta-a-tu-formulario-de-edicion/' + + '">' +
+                                    '<a class="" href="/ruta-a-tu-formulario-de-edicion/' + estudiante.id + '">' +
                                     '<i class="far fa-eye"></i>' +
                                     '</a>' +
                                     '</td>' +
@@ -159,16 +167,4 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    @endsection
+@endsection

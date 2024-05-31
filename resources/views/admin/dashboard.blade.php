@@ -38,7 +38,13 @@
 </div>
 @endcan
 @can('estudent.dashboard')
-<h1>Hola Mundo de estudiante</h1>
+<div class="row">
+
+    <div class="col-md-3">
+        <x-adminlte-small-box title="{{$calificacione}}" text="Calificaciones" icon="fas fa-book text-black"
+            theme="info" url="{{route('estudent.index')}}" url-text="Ver todos.."/>
+    </div>
+</div>
 @endcan
 @can('teacher.dashboard')
 <div class="row">

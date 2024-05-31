@@ -92,10 +92,16 @@ class Personal extends Model
 
 
 
-    public function calificaciones()
+   
+
+    public function estudiantes()
     {
-        return $this->hasMany(Calificacione::class);
+        return $this->hasMany(Calificacione::class, 'personal_id');
     }
 
+    public function calificaciones()
+    {
+        return $this->hasMany(Calificacion::class, 'personal_id');
+    }
   
 }

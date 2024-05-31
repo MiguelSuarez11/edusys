@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profesores', [CalificacionesController::class, 'index'])->name('profesor.index');
     Route::post('/profesor/store', [CalificacionesController::class, 'store'])->name('profesor.store');
+    Route::get('/estudiante' , [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
 
 
 
@@ -73,6 +74,7 @@ Route::get('/cursoss', [DependentDropdownController::class, 'getCursos'])->name(
 Route::get('/estudiantes/{cursoId}', [DependentDropdownController::class, 'getEstudiantes'])->name('estudiantes.index');
 
 Route::get('/profesor/estudiantes/{curso}', [CalificacionesController::class, 'getEstudiantesByCurso'])->name('profesor.getEstudiantesByCurso');
+Route::get('/estudiantess/{AsigId}',[CalificacionesController::class, 'getEstudiantesByAsig'])->name('estudent.getEstudiantesByAsig');
 
 
 

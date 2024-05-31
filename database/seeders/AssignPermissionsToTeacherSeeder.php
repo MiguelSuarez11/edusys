@@ -27,5 +27,25 @@ class AssignPermissionsToTeacherSeeder extends Seeder
                 $this->command->info('Permiso "teacher.dashboard" no encontrado.');
             }
         }
+
+          // Obtener el rol 'profesor'
+          $rolestudent = Role::findByName('estudiante');
+
+          // Obtener el permiso 'teacher.dashboard'
+          $permisoestudentDashboard = Permission::where('name', 'estudent.dashboard')->first();
+  
+          // Asignar el permiso al rol
+          if ($rolestudent && $permisoestudentDashboard) {
+              $rolestudent->givePermissionTo($permisoestudentDashboard);
+          } else {
+              if (!$rolestudent) {
+                  $this->command->info('Rol "Estudiante" no encontrado.');
+              }
+              if (!$permisoestudentDashboard) {
+                  $this->command->info('Permiso "estudent.dashboard" no encontrado.');
+              }
+          }
     }
+
+    
 }
