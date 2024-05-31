@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/asistencia', [AsistenciaController::class, 'store'])->middleware('auth');
     Route::post('/profesor/store', [CalificacionesController::class, 'store'])->name('profesor.store');
     Route::get('/estudiante' , [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
+    
 
 
 

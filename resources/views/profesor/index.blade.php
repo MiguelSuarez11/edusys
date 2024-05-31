@@ -132,7 +132,7 @@
                                     '<td>' + estudiante.nombres + '</td>' +
                                     '<td>' + estudiante.correo + '</td>' +
                                     '<td>' +
-                                    '<a class="" href="/estudiantess/index' + estudiante.id + '">' +
+                                    '<a class="" href="{{ route('estudent.index') }}">' +
                                     '<i class="far fa-eye"></i>' +
                                     '</a>' +
                                     '</td>' +
