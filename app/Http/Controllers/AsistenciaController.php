@@ -11,16 +11,10 @@ class AsistenciaController extends Controller
     public function index()
     {
         // Obtener todos los registros de asistencia (ejemplo si tienes un modelo Asistencia)
-         $asistencias = Asistencia::all();
+        $asistencias = Asistencia::all();
 
         // Retornar una vista con los datos de asistencia
-        // return view('asistencia.index', compact('asistencias'));
-
-        // O retornar una respuesta JSON
-        // return response()->json($asistencias);
-
-        // Por ahora, solo devolver un mensaje de ejemplo
-        return view('asistencia.index',compact('asistencias'));
+        return view('asistencia.index', compact('asistencias'));
     }
 
     // Método para manejar la solicitud POST a /asistencia
@@ -40,3 +34,4 @@ class AsistenciaController extends Controller
         return response()->json(['message' => 'Asistencia registrada'], 201);
     }
 }
+

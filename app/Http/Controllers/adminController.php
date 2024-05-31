@@ -25,8 +25,8 @@ class adminController extends Controller
         $users = User::where('estado', 1)->count();
         $cursos = Curso::where('estado', 1)->count();
         $calificacione = Calificacion::where('estado',1)->count();
-        $asitencia= Asistencia::where('estado',1)->count();
-        return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione','asistencia'));
+
+        return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione'));
         //return view('admin.dashboard', compact( 'personalR', 'users', 'cursos', 'calificacione'));
     }
 }
