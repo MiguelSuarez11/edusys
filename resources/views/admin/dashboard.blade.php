@@ -58,6 +58,10 @@
         <x-adminlte-small-box title="{{$calificacione}}" text="Calificaciones" icon="fas fa-book text-black"
             theme="info" url="{{route('profesor.index')}}" url-text="Ver todos.."/>
     </div>
+    <div class="col-md-3">
+        <x-adminlte-small-box title="" text="Asistencia" text="Asistencia" icon="fas fa-book text-black"
+            theme="info" url="{{route('asistencia.index')}}" url-text="Ver todos.."/>
+    </div>
 </div>
 @endcan
 @stop

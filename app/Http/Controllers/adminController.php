@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asistencia;
 use App\Models\Calificacion;
 use App\Models\Curso;
 use App\Models\Personal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
+use App\Models\Asignatura;
 class adminController extends Controller
 {
     public function __construct()
@@ -24,8 +25,8 @@ class adminController extends Controller
         $users = User::where('estado', 1)->count();
         $cursos = Curso::where('estado', 1)->count();
         $calificacione = Calificacion::where('estado',1)->count();
-
-        return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione'));
+        $asitencia= Asistencia::where('estado',1)->count();
+        return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione','asistencia'));
         //return view('admin.dashboard', compact( 'personalR', 'users', 'cursos', 'calificacione'));
     }
 }

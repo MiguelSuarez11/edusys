@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AsistenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +57,14 @@ Route::middleware('auth')->group(function () {
 //Rutas de profesores
 Route::middleware('auth')->group(function () {
     Route::get('/profesores', [CalificacionesController::class, 'index'])->name('profesor.index');
+    Route::get('/asistencia', [AsistenciaController::class, 'index'])->name('asistencia.index');
+    Route::post('/asistencia', [AsistenciaController::class, 'store'])->middleware('auth');
     Route::post('/profesor/store', [CalificacionesController::class, 'store'])->name('profesor.store');
     Route::get('/estudiante' , [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
+
+
+
+
 
 
 
