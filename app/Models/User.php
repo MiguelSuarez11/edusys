@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -54,4 +56,13 @@ class User extends Authenticatable
     }
 
 
+    public function PersonalUser(): BelongsTo
+    {
+        return $this->belongsTo(Personal::class, 'personal_id', 'id');
+    }
+
+    public function cursos(): BelongsToMany
+    {
+        return $this->belongsToMany(Curso::class);
+    }
 }

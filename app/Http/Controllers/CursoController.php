@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curso;
+use App\Models\Personal;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 /**
  * Class CursoController
@@ -20,8 +23,12 @@ class CursoController extends Controller
     {
         $cursos = Curso::all();
         $curso = new Curso();
-        return view('curso.index', compact('cursos','curso'));
+        return view('curso.index', compact('cursos', 'curso'));
     }
+
+
+   
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +37,6 @@ class CursoController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -46,8 +52,8 @@ class CursoController extends Controller
         $curso = Curso::create($request->all());
 
         return redirect()->route('cursos.index')
-        ->with('success', 'Curso creado con éxito')
-        ->with('title', 'Guardado');
+            ->with('success', 'Curso creado con éxito')
+            ->with('title', 'Guardado');
     }
 
     /**
@@ -90,8 +96,8 @@ class CursoController extends Controller
         $curso->update($request->all());
 
         return redirect()->route('cursos.index')
-        ->with('success', 'Curso Editado con éxito')
-        ->with('title', 'Guardado');
+            ->with('success', 'Curso Editado con éxito')
+            ->with('title', 'Guardado');
     }
 
     /**
@@ -104,7 +110,7 @@ class CursoController extends Controller
         $curso = Curso::find($id)->delete();
 
         return redirect()->route('cursos.index')
-        ->with('success', 'Curso eliminado con éxito')
-        ->with('title', 'Eliminado');
+            ->with('success', 'Curso eliminado con éxito')
+            ->with('title', 'Eliminado');
     }
 }

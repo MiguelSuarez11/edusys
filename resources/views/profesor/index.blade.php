@@ -62,14 +62,14 @@
                                     <label for="curso">Curso:</label>
                                     <select name="curso" id="curso" class="form-control">
                                         <option value="">Seleccionar curso</option>
-                                        @foreach ($cursos as $curso)
+                                        @foreach ($user->cursos as $curso)
                                             <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="row mt-3">
+                            <div class="mt-3 row">
                                 <div class="col-12">
                                     <table class="table table-bordered" id="estudiantes-table">
                                         <thead>

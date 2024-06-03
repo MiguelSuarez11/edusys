@@ -302,8 +302,10 @@ return [
         ],
 
         // Sidebar items:
-        ['header' => 'Gestion de Usuarios',
-            'can'=> 'admin.usuarios.index'],
+        [
+            'header' => 'Gestion de Usuarios',
+            'can' => 'admin.usuarios.index'
+        ],
         [
             'text'    => 'Personal',
             'icon'    => 'fas fa-people-arrows',
@@ -338,6 +340,13 @@ return [
                     'icon'    => 'fas fa-id-badge',
                     'route'  => 'cursos.index',
                 ],
+
+                [
+                    'text' => 'Asignar Cursos',
+                    'icon'    => 'fas fa-id-badge',
+                    'route'  => 'cursos.index',
+                ],
+
             ],
         ],
         [
@@ -350,9 +359,11 @@ return [
                     'icon'    => 'fas fa-book',
                     'route'  => 'asignaturas.index',
                 ],
+
+
             ],
         ],
-        ['header' => 'account_settings','can'=>'admin.rol.index'],
+        ['header' => 'account_settings', 'can' => 'admin.rol.index'],
         [
             'text' => 'Configuraciones',
             'icon' => 'fas fa-cogs',
@@ -364,6 +375,7 @@ return [
                     'route'  => 'roles.index',
 
                 ],
+
             ],
         ],
     ],

@@ -14,6 +14,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AsistenciaController;
+use App\Http\Controllers\CursoProfesorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/estudiante', [estudianteController::class, 'index'])->name('estudiante.dashboard');
     Route::get('/profesor', [profesorController::class, 'index'])->name('profesor.dashboard');
     Route::get('/dashboard', [adminController::class, 'index'])->name('dashboard');
+  
+
+
+
+
+    // ASIGNACION DE CURSOS
+    Route::get('/curso-profesor', [CursoProfesorController::class, 'index'])->name('cursos.asignacion');
+Route::get('/curso-profesor/{user}/edit', [CursoProfesorController::class, 'edit'])->name('cursos.asignacionEdit');
+Route::put('/curso-profesor/{user}', [CursoProfesorController::class, 'update'])->name('cursos.asignacionUpdate');
+  Route::get('/asignacion-curso', [CursoProfesorController::class, 'asignacionCurso'])->name('cursos.asignacionCurso');
+
+
+
+
 });
 
 // Rutas de Control e Ingresos del sistema
@@ -60,8 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/asistencia', [AsistenciaController::class, 'index'])->name('asistencia.index');
     Route::post('/asistencia', [AsistenciaController::class, 'store'])->middleware('auth');
     Route::post('/profesor/store', [CalificacionesController::class, 'store'])->name('profesor.store');
-    Route::get('/estudiante' , [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
-    
+    Route::get('/estudiante', [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
+
 
 
 
@@ -82,7 +97,7 @@ Route::get('/cursoss', [DependentDropdownController::class, 'getCursos'])->name(
 Route::get('/estudiantes/{cursoId}', [DependentDropdownController::class, 'getEstudiantes'])->name('estudiantes.index');
 
 Route::get('/profesor/estudiantes/{curso}', [CalificacionesController::class, 'getEstudiantesByCurso'])->name('profesor.getEstudiantesByCurso');
-Route::get('/estudiantess/{AsigId}',[CalificacionesController::class, 'getEstudiantesByAsig'])->name('estudent.getEstudiantesByAsig');
+Route::get('/estudiantess/{AsigId}', [CalificacionesController::class, 'getEstudiantesByAsig'])->name('estudent.getEstudiantesByAsig');
 
 
 

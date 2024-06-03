@@ -3,7 +3,7 @@
 @section('title', 'Cursos')
 
 @section('content_header')
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+    <h2 class="text-xl font-semibold leading-tight text-center text-gray-800">
         {{ __('Lista de Cursos') }}
     </h2>
 @stop
@@ -17,16 +17,20 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <div class="float-right">
-                                <a href="" class="btn btn-info btn-sm float-right" data-placement="left"
+                                <a href="" class="float-right btn btn-info btn-sm" data-placement="left"
                                     data-toggle="modal" data-target="#modalMin">
                                     {{ __('Nuevo Curso') }}
                                 </a>
+                                <br><br>
+                                <a href="{{ route('cursos.asignacion') }}" class="float-right btn btn-info btn-sm">
+                                    {{ __('Asignar Curso') }}</a>
+
                                 <x-adminlte-modal id="modalMin" title="Nuevo Curso" size="sm" theme="info">
                                     <form method="POST" action="{{ route('cursos.store') }}" role="form"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @include('curso.form')
-                                        
+
                                     </form>
                                 </x-adminlte-modal>
                             </div>
@@ -38,7 +42,7 @@
                             @foreach ($cursos as $curso)
                                 <div class="col-sm-2">
                                     <div class="card">
-                                        <div class="card-header bg-info text-sm ">
+                                        <div class="text-sm card-header bg-info ">
                                             <div>
                                                 Numero Identificador: {{ $curso->id }}
                                             </div>
@@ -53,20 +57,21 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="card-footer text-center ">
+                                        <div class="text-center card-footer ">
                                             <form id="deleteForm-{{ $curso->id }}"
                                                 action="{{ route('cursos.destroy', $curso->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-success" data-toggle="modal"
-                                                data-target="#modaledit"
-                                                onclick="cargarInformacionCurso({{ $curso->id }})"><i
-                                                    class="fa fa-fw fa-edit"></i> </a>
+                                                    data-target="#modaledit"
+                                                    onclick="cargarInformacionCurso({{ $curso->id }})"><i
+                                                        class="fa fa-fw fa-edit"></i> </a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <a type="button" class="btn btn-danger btn-sm deleteButton"
                                                     data-ficha-id="{{ $curso->id }}"><i class="fa fa-fw fa-trash"></i>
                                                 </a>
                                             </form>
-                                            <x-adminlte-modal id="modaledit" title="Editar Curso" size="sm" theme='info'>
+                                            <x-adminlte-modal id="modaledit" title="Editar Curso" size="sm"
+                                                theme='info'>
                                                 <form method="POST" action="{{ route('cursos.update', $curso->id) }}"
                                                     role="form" enctype="multipart/form-data">
                                                     {{ method_field('PATCH') }}
@@ -75,7 +80,7 @@
                                                 </form>
                                             </x-adminlte-modal>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             @endforeach
@@ -88,20 +93,20 @@
 @endsection
 
 @section('js')
-<script>
-    $(document).ready(function() {
-        $('#miTabla').DataTable();
-        @if (Session::has('success'))
-            Swal.fire({
-                icon: "success",
-                title: '{{ Session::get('title') }}',
-                text: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        @endif
-        
-        $(document).on('click', '.deleteButton', function() {
+    <script>
+        $(document).ready(function() {
+            $('#miTabla').DataTable();
+            @if (Session::has('success'))
+                Swal.fire({
+                    icon: "success",
+                    title: '{{ Session::get('title') }}',
+                    text: '{{ Session::get('success') }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            @endif
+
+            $(document).on('click', '.deleteButton', function() {
                 const fichaId = $(this).data('ficha-id');
                 const formId = `#deleteForm-${fichaId}`;
 
@@ -128,23 +133,23 @@
                     }
                 });
             });
-    });
-</script>
-<script>
-    // Esta función se ejecutará cuando se haga clic en el botón de editar
-    function cargarInformacionCurso(cursoId) {
-        // Realizar una petición AJAX para obtener la información del curso
-        $.ajax({
-            url: "{{ route('cursos.edit', ':id') }}".replace(':id', cursoId),
-            method: 'GET',
-            success: function(response) {
-                // Colocar la información del curso dentro del cuerpo del modal
-                $('#modalMin .modal-body').html(response);
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
         });
-    }
-</script>
+    </script>
+    <script>
+        // Esta función se ejecutará cuando se haga clic en el botón de editar
+        function cargarInformacionCurso(cursoId) {
+            // Realizar una petición AJAX para obtener la información del curso
+            $.ajax({
+                url: "{{ route('cursos.edit', ':id') }}".replace(':id', cursoId),
+                method: 'GET',
+                success: function(response) {
+                    // Colocar la información del curso dentro del cuerpo del modal
+                    $('#modalMin .modal-body').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
 @stop

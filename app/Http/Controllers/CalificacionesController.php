@@ -27,7 +27,7 @@ class CalificacionesController extends Controller
         $estudiantes = User::with('personal');
         $calificaciones = Calificacion::all();
 
-        return view('profesor.index', compact('cursos', 'asignaturas', 'estudiantes', 'personal', 'calificaciones', 'tiposCursos'));
+        return view('profesor.index', compact('cursos', 'asignaturas', 'estudiantes', 'personal', 'calificaciones', 'tiposCursos'))->with('user', auth()->user());
         //
     }
 
@@ -36,12 +36,12 @@ class CalificacionesController extends Controller
      */
     public function create()
     {
-       
+
         $calificacions = new Calificacione();
         $cursos = Curso::all();
         $periodos = Periodo::pluck('nombre', 'id');
         $asignaturas = Asignatura::pluck('nombre', 'id');
-        return view('profesor.create', compact( 'cursos', 'calificacions', 'asignaturas', 'periodos'));
+        return view('profesor.create', compact('cursos', 'calificacions', 'asignaturas', 'periodos'))->with('user', auth()->user());
     }
     public function mostrarAsig()
     {
@@ -50,7 +50,7 @@ class CalificacionesController extends Controller
         $estudiantes = User::with('personal');
         $calificaciones = Calificacion::all();
         return view('estudiantes.index', compact('asignaturas', 'estudiantes', 'calificaciones'));
-    } 
+    }
 
 
     public function store(Request $request)
@@ -140,7 +140,7 @@ class CalificacionesController extends Controller
     private function calcularNotaFinal($calificacion)
     {
         $notas = [$calificacion->periodo_1, $calificacion->periodo_2, $calificacion->periodo_3, $calificacion->periodo_4];
-        $notasValidas = array_filter($notas, function($nota) {
+        $notasValidas = array_filter($notas, function ($nota) {
             return !is_null($nota);
         });
 
@@ -162,25 +162,25 @@ class CalificacionesController extends Controller
     public function getEstudiantesByAsig($AsigId)
     {
         // $estudiantes = Calificacion::where('asignatura_id', $AsigId)->get();
-        
+
 
         $estudiantes = Calificacion::with('personal')
-        ->where('asignatura_id', $AsigId)
-        ->get();
-        return response()->json($estudiantes );
+            ->where('asignatura_id', $AsigId)
+            ->get();
+        return response()->json($estudiantes);
     }
 
     public function getCalificaciones()
-{
-    $calificaciones = Calificacion::with('personal')->get();
-    return response()->json($calificaciones, 200, [], JSON_PRETTY_PRINT);
-}
+    {
+        $calificaciones = Calificacion::with('personal')->get();
+        return response()->json($calificaciones, 200, [], JSON_PRETTY_PRINT);
+    }
 
     public function getEstudiantes()
-{
-    $estudiantes = calificacione::with('personal_id')->get();
-    return response()->json($estudiantes);
-}
+    {
+        $estudiantes = calificacione::with('personal_id')->get();
+        return response()->json($estudiantes);
+    }
 
     /**
      * Display the specified resource.
