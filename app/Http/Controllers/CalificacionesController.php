@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asignatura;
+use App\Models\Asistencia;
 use App\Models\Calificacion;
 use App\Models\calificacione;
 use App\Models\Category;
 use App\Models\Curso;
 use App\Models\Periodo;
 use App\Models\Personal;
-use App\Models\Subcategory;
+
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CalificacionesController extends Controller
 {
@@ -20,14 +22,30 @@ class CalificacionesController extends Controller
      */
     public function index()
     {
+
+
+        $cursos = Curso::where('estado', 1)->count();
+        $calificacione = Calificacion::where('estado', 1)->count();
+
+
+
+        return view('calificaciones.index', compact('cursos', 'calificacione',));
+        //
+    }
+
+
+    public function index_calificaciones()
+    {
         $personal = Personal::where('');
         $tiposCursos = Curso::pluck('nombre', 'id');
         $cursos = Curso::all();
         $asignaturas = Asignatura::all();
         $estudiantes = User::with('personal');
-        $calificaciones = Calificacion::all();
+        $calificaciones = calificacione::all()->where('estado', 1);
 
-        return view('calificaciones.index', compact('cursos', 'asignaturas', 'estudiantes', 'personal', 'calificaciones', 'tiposCursos'))->with('user', auth()->user());
+        return view('calificaciones.list', compact('cursos', 'asignaturas', 'estudiantes', 'personal', 'calificaciones', 'tiposCursos'))->with('user', auth()->user());
+
+
         //
     }
 
@@ -175,14 +193,7 @@ class CalificacionesController extends Controller
         return $totalNotas > 0 ? $suma / $totalNotas : 0;
     }
 
-    // public function getEstudiantesByCurso($cursoId)
-    // {
-    //     // Obtener los estudiantes del curso específico
-    //     $estudiantes = Personal::where('cursos', $cursoId)->get();
 
-    //     // Retornar la respuesta como JSON
-    //     return response()->json($estudiantes);
-    // }
 
     public function getEstudiantesByCurso($estudianteId)
     {
@@ -200,11 +211,13 @@ class CalificacionesController extends Controller
         }
     }
 
+
+
     public function getEstudiantesByAsig($AsigId, $estudianteId)
     {
         $calificacion = Calificacion::with('personal')
             ->where('asignatura_id', $AsigId)
-            ->where('estudiante_id', $estudianteId)
+            ->where('personal_id', $estudianteId)
             ->first();
 
         return response()->json($calificacion);
@@ -212,52 +225,20 @@ class CalificacionesController extends Controller
 
 
 
-    // public function getEstudiantesByAsig($AsigId)
-    // {
-    //     // $estudiantes = Calificacion::where('asignatura_id', $AsigId)->get();
 
-
-    //     $estudiantes = Calificacion::with('personal')
-    //         ->where('asignatura_id', $AsigId)
-    //         ->get();
-    //     return response()->json($estudiantes);
-    // }
-
-    // public function getCalificacionEstudiante($asigId, $estudianteId)
-    // {
-    //     //Buscar la calificación del estudiante en la asignatura especificada
-    //     $calificacion = Calificacion::with('personal')
-    //         ->where('asignatura_id', $asigId)
-    //         ->where('personal_id', $estudianteId)
-    //         ->first();
-
-    //     //Verificar si se encontró la calificación
-    //     if ($calificacion) {
-    //         return response()->json($calificacion);
-    //     } else {
-    //         // Si no se encontró la calificación, devolver un error 404
-    //         return response()->json(['error' => 'Calificación no encontrada'], 404);
-    //     }
-    // }
-
-    public function getCalificacionEstudiante($AsigId, $estudianteId)
+    public function getCalificacionEstudiante($asigId, $estudianteId)
     {
-        // Obtener la calificación del estudiante en la asignatura específica
         $calificacion = Calificacion::with('personal')
-            ->where('asignatura_id', $AsigId)
+            ->where('asignatura_id', $asigId)
             ->where('personal_id', $estudianteId)
             ->first();
 
-        // Verificar si se encontró una calificación para el estudiante en la asignatura
         if ($calificacion) {
-            // Retornar la calificación del estudiante como respuesta JSON
             return response()->json($calificacion);
         } else {
-            // Si no se encuentra ninguna calificación para el estudiante en la asignatura, devolver una respuesta con un mensaje de error y un código de estado apropiado
-            return response()->json(['error' => 'Calificación no encontrada para el estudiante en esta asignatura'], 404);
+            return response()->json(['error' => 'Calificación no encontrada'], 200);
         }
     }
-
 
 
 
@@ -279,32 +260,88 @@ class CalificacionesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(calificacion $calificaciones)
+    public function show(calificacione $calificaciones)
     {
-        //
+        $personal = Personal::where('');
+        $tiposCursos = Curso::pluck('nombre', 'id');
+        $cursos = Curso::all();
+        $asignaturas = Asignatura::all();
+        $estudiantes = User::with('personal');
+        $calificaciones = Calificacion::all();
+
+        return view('calificaciones.show', compact('cursos', 'asignaturas', 'estudiantes', 'personal', 'calificaciones', 'tiposCursos'))->with('user', auth()->user());
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(calificacion $calificaciones)
+    public function edit($id)
     {
-        //
+        $calificacion = Calificacione::find($id);
+        $user = Auth::user();
+        $asignaturas = Asignatura::pluck('nombre', 'id');
+        $periodos = Periodo::pluck('nombre', 'id');
+        $estudiantes = Personal::whereHas('cursos', function ($query) use ($calificacion) {
+            $query->where('curso_id', $calificacion->curso_id);
+        })->get();
+
+        return view('calificaciones.edit', compact('calificacion', 'user', 'asignaturas', 'periodos', 'estudiantes'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, calificacion $calificaciones)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nota1' => 'nullable|numeric',
+            'nota2' => 'nullable|numeric',
+            'nota3' => 'nullable|numeric',
+            'nota4' => 'nullable|numeric',
+        ]);
+
+        $calificacion = Calificacione::find($id);
+        if (!$calificacion) {
+            return redirect()->back()->with('error', 'Calificación no encontrada');
+        }
+
+        $calificacion->nota_1 = $request->input('nota1') !== null ? floatval($request->input('nota1')) : null;
+        $calificacion->nota_2 = $request->input('nota2') !== null ? floatval($request->input('nota2')) : null;
+        $calificacion->nota_3 = $request->input('nota3') !== null ? floatval($request->input('nota3')) : null;
+        $calificacion->nota_4 = $request->input('nota4') !== null ? floatval($request->input('nota4')) : null;
+        $calificacion->nota_definitiva = $request->input('definitiva') !== null ? floatval($request->input('definitiva')) : null;
+        $calificacion->save();
+
+        return redirect()->route('calificaciones.index')->with('success', 'Calificación actualizada correctamente');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(calificacion $calificaciones)
+    public function destroy($id)
     {
-        //
+        $calificaciones = Calificacione::find($id);
+
+        if ($calificaciones) {
+            // Verifica si el estado actual es 1
+            if ($calificaciones->estado === 1) {
+                // Estado actual es 1, entonces actualiza a 0
+                $calificaciones->update(['estado' => 0]);
+                return redirect()->route('calificaciones.index_calificaciones')
+                    ->with('success', 'Calificacion eliminada con éxito')
+                    ->with('title', 'Eliminado');
+            } else {
+                // Estado actual es 0, entonces actualiza a 1
+                $calificaciones->update(['estado' => 1]);
+                return redirect()->route('calificaciones.index')
+                    ->with('success', 'Personal activado con éxito')
+                    ->with('title', 'Activado');
+            }
+        } else {
+            return redirect()->route('calificaciones.index')
+                ->with('error', 'No se encontró la calificaciones');
+        }
     }
 }

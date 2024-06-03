@@ -37,10 +37,11 @@
                         <div class="card-header">
                             <span class="card-title">{{ __('') }}</span>
                             <div class="float-right">
-                                <a class="btn btn-primary" href="{{ route('personal.index') }}"> {{ __('Regresar') }}</a>
+                                <a class="btn btn-primary" href="{{ route('calificaciones.index') }}">
+                                    {{ __('Regresar') }}</a>
                             </div>
                             <h1>Mis Calificaciones</h1>
-                            <div class="text-center card-header"><label>Estudiante Seleccionado:</label>
+                            <div class="text-center "><label>Estudiante Seleccionado:</label>
                                 {{ $personal->nombres }}</div>
 
                         </div>
@@ -81,7 +82,7 @@
                                                     <th>Periodo 2</th>
                                                     <th>Periodo 3</th>
                                                     <th>Periodo 4</th>
-                                                    <th>Acciones</th>
+
 
                                                 </tr>
                                             </thead>
@@ -116,12 +117,14 @@
 
 
 
+
+        <!-- Asegúrate de cargar jQuery antes de tu script -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('#curso').change(function() {
                     var AsigId = $(this).val();
-                    var estudianteId = $('#estudiante_id')
-                        .val(); // Aquí deberías obtener el ID del estudiante seleccionado
+                    var estudianteId = $('#estudiante_id').val();
 
                     if (AsigId && estudianteId) {
                         $.ajax({
@@ -132,36 +135,40 @@
                                 var estudiantesTable = $('#estudiantes-table tbody');
                                 estudiantesTable.empty();
 
-                                var periodo_1 = calificacion.periodo_1 !== null ? calificacion
-                                    .periodo_1 : 'no definida';
-                                var periodo_2 = calificacion.periodo_2 !== null ? calificacion
-                                    .periodo_2 : 'no definida';
-                                var periodo_3 = calificacion.periodo_3 !== null ? calificacion
-                                    .periodo_3 : 'no definida';
-                                var periodo_4 = calificacion.periodo_4 !== null ? calificacion
-                                    .periodo_4 : 'no definida';
-                                var nombrePersonal = calificacion.personal ? calificacion.personal
-                                    .nombres : 'no definida';
+                                if (calificacion.error) {
+                                    estudiantesTable.append(
+                                        '<tr><td colspan="7">El estudiante no tiene calificación aún</td></tr>'
+                                    );
+                                } else {
+                                    var periodo_1 = calificacion.periodo_1 !== null ? parseFloat(
+                                        calificacion.periodo_1).toFixed(1) : 'no definida';
+                                    var periodo_2 = calificacion.periodo_2 !== null ? parseFloat(
+                                        calificacion.periodo_2).toFixed(1) : 'no definida';
+                                    var periodo_3 = calificacion.periodo_3 !== null ? parseFloat(
+                                        calificacion.periodo_3).toFixed(1) : 'no definida';
+                                    var periodo_4 = calificacion.periodo_4 !== null ? parseFloat(
+                                        calificacion.periodo_4).toFixed(1) : 'no definida';
+                                    var nombrePersonal = calificacion.personal ? calificacion
+                                        .personal.nombres : 'no definida';
 
-                                estudiantesTable.append(
-                                    '<tr>' +
-                                    '<td>' + calificacion.id + '</td>' +
-                                    '<td>' + nombrePersonal + '</td>' +
-                                    '<td>' + periodo_1 + '</td>' +
-                                    '<td>' + periodo_2 + '</td>' +
-                                    '<td>' + periodo_3 + '</td>' +
-                                    '<td>' + periodo_4 + '</td>' +
-                                    '<td>' +
-                                    '<a class="" href="/ruta-a-tu-formulario-de-edicion/' +
-                                    calificacion.id + '">' +
-                                    '<i class="far fa-eye"></i>' +
-                                    '</a>' +
-                                    '</td>' +
-                                    '</tr>'
-                                );
+                                    estudiantesTable.append(
+                                        '<tr>' +
+                                        '<td>' + calificacion.id + '</td>' +
+                                        '<td>' + nombrePersonal + '</td>' +
+                                        '<td>' + periodo_1 + '</td>' +
+                                        '<td>' + periodo_2 + '</td>' +
+                                        '<td>' + periodo_3 + '</td>' +
+                                        '<td>' + periodo_4 + '</td>' +
+                                        '<td>' +
+                                        '</td>' +
+                                        '</tr>'
+                                    );
+                                }
                             },
-                            error: function() {
-                                alert('Error al obtener la calificación del estudiante');
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                if (jqXHR.status !== 404) {
+                                    alert('Error al obtener la calificación del estudiante');
+                                }
                             }
                         });
                     } else {

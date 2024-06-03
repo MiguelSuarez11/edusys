@@ -71,28 +71,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/asistencia', [AsistenciaController::class, 'index'])->name('asistencia.index');
     Route::post('/asistencia', [AsistenciaController::class, 'store'])->middleware('auth');
     Route::post('/profesor/store', [CalificacionesController::class, 'store'])->name('profesor.store');
-    // Route::get('/estudiante', [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
+     Route::get('/estudiante', [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
 
 
     Route::get('/profesor/estudiantes/{cursoId}', [CalificacionesController::class, 'getEstudiantes']);
 
 
 
-
-
+    // Rutas de calificaciones
     Route::get('/alumnos/{id}', [CalificacionesController::class, 'mostrarAsig'])->name('estudiantes.shows');
-
-
     Route::get('/profesor/estudiantes/{cursoId}', [CalificacionesController::class, 'getPersonalsByCurso']);
-
-
-
-
-
-
-
-
     Route::resource('calificaciones', CalificacionesController::class);
+    Route::get('/calificaciones listado', [CalificacionesController::class, 'index_calificaciones'])->name('calificaciones.index_calificaciones');
+    Route::put('/calificaciones/{id}', [CalificacionesController::class, 'update'])->name('calificaciones.update');
+
 });
 
 
@@ -105,10 +97,7 @@ Route::get('/estudiantess/{AsigId}', [CalificacionesController::class, 'getEstud
 
 
 // Ruta para obtener la calificación del estudiante en una asignatura específica
-Route::get('/asignaturas/{AsigId}/estudiantes/{estudianteId}/calificacion', [CalificacionesController::class, 'getCalificacionEstudiante']);
-//Route::get('/asignaturas/{asigId}/estudiantes/{estudianteId}/calificacion', 'CalificacionesController@getCalificacionEstudiante');
-
-
+Route::get('/asignaturas/{asigId}/estudiantes/{estudianteId}/calificacion', [CalificacionesController::class, 'getCalificacionEstudiante']);
 
 
 

@@ -41,8 +41,10 @@
                 <div class="row">
 
                     <div class="col-md-3">
-                        <x-adminlte-small-box title="{{ $calificacione }}" text="Calificaciones" icon="fas fa-book text-black"
-                            theme="info" url="{{ route('estudent.index') }}" url-text="Ver todos.." />
+                      
+
+                        <x-adminlte-small-box title="" text="Mis Calificaciones" icon="fas fa-book text-black"
+                            theme="info" url="{{ route('estudiantes.shows', auth()->user()->id) }}" url-text="Ver todos.." />
                     </div>
                 </div>
             @endcan
@@ -59,8 +61,9 @@
                             theme="info" url="{{ route('calificaciones.index') }}" url-text="Ver todos.." />
                     </div>
                     <div class="col-md-3">
-                        <x-adminlte-small-box title="{{ $asistencia }}" text="Asistencia" text="Asistencia" icon="fas fa-book text-black"
-                            theme="info" url="{{ route('asistencia.index') }}" url-text="Ver todos.." />
+                        <x-adminlte-small-box title="{{ $asistencia }}" text="Asistencia" text="Asistencia"
+                            icon="fas fa-book text-black" theme="info" url="{{ route('asistencia.index') }}"
+                            url-text="Ver todos.." />
                     </div>
                 </div>
             @endcan

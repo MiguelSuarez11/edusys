@@ -37,26 +37,32 @@
 </div>
 
 <div class="row">
-    <!-- Notas -->
     <div class="col-6">
         <label for="nota1" class="form-label">Nota 1</label>
-        <input type="number" class="form-control" id="nota1" name="nota1" aria-describedby="helpId"
-            placeholder="" />
+        <input type="text" class="form-control" id="nota1" name="nota1" aria-describedby="helpId"
+            placeholder="" maxlength="5" oninput="validateNumberInput(this)"
+            value="{{ old('nota1', isset($calificacion->nota_1) ? number_format($calificacion->nota_1, 2) : '') }}" />
     </div>
+
     <div class="col-6">
         <label for="nota2" class="form-label">Nota 2</label>
-        <input type="number" class="form-control" id="nota2" name="nota2" aria-describedby="helpId"
-            placeholder="" />
+        <input type="text" class="form-control" id="nota2" name="nota2" aria-describedby="helpId"
+            placeholder="" maxlength="5" oninput="validateNumberInput(this)"
+            value="{{ old('nota2', isset($calificacion->nota_2) ? number_format($calificacion->nota_2, 2) : '') }}" />
     </div>
+
     <div class="col-6">
         <label for="nota3" class="form-label">Nota 3</label>
-        <input type="number" class="form-control" id="nota3" name="nota3" aria-describedby="helpId"
-            placeholder="" />
+        <input type="text" class="form-control" id="nota3" name="nota3" aria-describedby="helpId"
+            placeholder="" maxlength="5" oninput="validateNumberInput(this)"
+            value="{{ old('nota3', isset($calificacion->nota_3) ? number_format($calificacion->nota_3, 2) : '') }}" />
     </div>
+
     <div class="col-6">
         <label for="nota4" class="form-label">Nota 4</label>
-        <input type="number" class="form-control" id="nota4" name="nota4" aria-describedby="helpId"
-            placeholder="" />
+        <input type="text" class="form-control" id="nota4" name="nota4" aria-describedby="helpId"
+            placeholder="" maxlength="5" oninput="validateNumberInput(this)"
+            value="{{ old('nota4', isset($calificacion->nota_4) ? number_format($calificacion->nota_4, 2) : '') }}" />
     </div>
 </div>
 <div class="row">
@@ -122,6 +128,45 @@
             } else {
                 $('#estudiantes').html('<option value="">Seleccionar estudiante</option>');
             }
+        });
+    });
+</script>
+
+
+
+
+{{-- SCRIPT PARA QUE LOS INPUTS DE NOTA 1 , 2 , 3 Y 4 SOLO ACEPTEN NUMEROS Y MAXIMO 2 CARACTERES --}}
+
+
+
+
+<script>
+    function validateNumberInput(input) {
+        let value = input.value;
+
+        // Asegurarse de que solo haya un punto decimal y permitir números
+        value = value.replace(/[^0-9.]/g, '');
+
+        // Limitar a 2 dígitos enteros y 2 decimales
+        if (value.includes('.')) {
+            let [integers, decimals] = value.split('.');
+            integers = integers.slice(0, 2);
+            decimals = decimals.slice(0, 1);
+            value = `${integers}.${decimals}`;
+        } else {
+            value = value.slice(0, 2);
+        }
+
+        input.value = value;
+    }
+
+    // Aplicar la validación a todos los inputs de nota
+    document.addEventListener('DOMContentLoaded', function() {
+        var notaInputs = ['nota1', 'nota2', 'nota3', 'nota4'];
+        notaInputs.forEach(function(id) {
+            document.getElementById(id).addEventListener('input', function() {
+                validateNumberInput(this);
+            });
         });
     });
 </script>

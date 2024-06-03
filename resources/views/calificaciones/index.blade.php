@@ -1,178 +1,96 @@
 @extends('adminlte::page')
-@section('title', 'Cursos')
+
+@section('title', 'Pagina - Principal')
 
 @section('content_header')
+    <div class="container text-center">
+        <h1 class="mb-4">¡Bienvenido al Sistema de Gestion EduSys+!</h1>
+        <h5 class="mb-4"> Coordial saludo, <br><b>{{ Auth::user()->name }}</b></h5>
+        <div class="card">
+            {{-- <div class="card-body">
+    <p class="lead">
+        -- Frase del dia --<br>
+        <b>"{{$data['phrase']}}"</b>
+      <p class="text-sm text-muted">Autor: {{$data['author']}}</p>
+    </p>
+    </div> --}}
+        @stop
+
+        @section('content')
 
 
 
+            <div class="row">
 
 
 
-
-
-
-
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-
-    <body>
-        <div class="container mt-5">
-
-        </div>
-
-
-
-
-
-
-        <section class="content container-fluid">
-            <div class="">
-                <div class="col-md-12">
-
-                    @includeif('partials.errors')
-
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <span class="card-title">{{ __('') }}</span>
-                            <div class="float-right">
-                                <a class="btn btn-primary" href="{{ route('dashboard') }}"> {{ __('Regresar') }}</a>
-                            </div>
-                            <div class="float-left">
-                                <a class="btn btn-info" href="{{ route('calificaciones.create') }}" data-placement="left">
-                                    {{ __('Registar Calificacion') }}
-                                </a>
-
-                            </div>
-                        </div>
-
-                        <div class="card-header">
-                            <span class="card-title">{{ __('') }}</span>
-
-                        </div>
-
-                        <div class="card-body">
-                            <form method="post" action="{{ route('calificaciones.store') }}" role="form"
-                                enctype="multipart/form-data">
-                                @csrf
-
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="curso">Curso:</label>
-                                        <select name="curso" id="curso" class="form-control">
-                                            <option value="">Seleccionar curso</option>
-                                            @foreach ($user->cursos as $curso)
-                                                <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 row">
-                                    <div class="col-12">
-                                        <table class="table table-bordered" id="estudiantes-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Nombre</th>
-                                                    <th>Correo</th>
-                                                    <th>Acciones</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <!-- Aquí puedes agregar los campos adicionales del formulario -->
-
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </form>
-                        </div>
-                    </div>
+                <div class="col-md-3">
+                    <x-adminlte-small-box title="{{ $calificacione }}" text="Ver Calificaciones" icon="fas fa-book text-black"
+                        theme="info" url="{{ route('calificaciones.index_calificaciones') }}" url-text="Ver todos.." />
                 </div>
+
+                <div class="col-md-3">
+                    <x-adminlte-small-box title="{{ $calificacione }}" text="Registrar Calificacion"
+                        icon="fas fa-book text-black" theme="info" url="{{ route('calificaciones.create') }}"
+                        url-text="Ver todos.." />
+                </div>
+
             </div>
-        </section>
 
 
 
 
+        @stop
+        @section('js')
+            <script>
+                $(document).ready(function() {
+                    $('#miTabla').DataTable();
+                });
+            </script>
+            <script>
+                $(document).ready(function() {
+                    @if (Session::has('success'))
+                        Swal.fire({
+                            icon: "success",
+                            title: '{{ Session::get('tittle') }}',
+                            text: '{{ Session::get('success') }}',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    @endif
+                });
+            </script>
+            <script>
+                $(document).ready(function() {
+                    // Delegación de eventos para manejar clics en cualquier botón de eliminación
+                    $(document).on('click', '.deleteButton', function() {
+                        const fichaId = $(this).data('ficha-id');
+                        const formId = `#deleteForm-${fichaId}`;
 
-
-
-
-
-
-
-
-
-
-        <script>
-            $(document).ready(function() {
-                $('#curso').change(function() {
-                    var cursoId = $(this).val();
-
-                    if (cursoId) {
-                        $.ajax({
-                            url: '/profesor/estudiantes/' + cursoId,
-                            type: 'GET',
-                            success: function(response) {
-                                var estudiantesTable = $('#estudiantes-table tbody');
-                                estudiantesTable.empty();
-
-                                response.forEach(function(personal) {
-                                    estudiantesTable.append(
-                                        '<tr>' +
-                                        '<td>' + personal.id + '</td>' +
-                                        '<td>' + personal.nombres + '</td>' +
-                                        '<td>' + personal.correo + '</td>' +
-                                        '<td>' +
-                                        '<a href="/alumnos/' + personal.id + '">' +
-                                        // Enlazar a una ruta genérica
-                                        '<i class="far fa-eye"></i>' +
-                                        '</a>' +
-                                        '</td>' +
-                                        '</tr>'
-                                    );
+                        Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: '¡No podrás revertir esto!',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí, bórralo',
+                            cancelButtonText: 'No, cancelar',
+                            reverseButtons: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Si el usuario confirma, enviar el formulario de eliminación
+                                $(formId).submit();
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                Swal.fire({
+                                    title: 'Cancelado',
+                                    text: 'Tu acción fue cancelada con éxito',
+                                    icon: 'error'
                                 });
-                            },
-                            error: function(xhr, status, error) {
-                                console.log("Error: " + error);
-                                console.log("Status: " + status);
-                                console.dir(xhr);
-                                alert('Error al obtener los estudiantes');
                             }
                         });
-                    } else {
-                        $('#estudiantes-table tbody').empty();
-                    }
+                    });
                 });
-            });
-        </script>
+            </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @endsection
+        @stop

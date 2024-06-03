@@ -68,4 +68,9 @@ class Curso extends Model
     }
 
 
+    public function personal()
+    {
+        return $this->belongsTo(Personal::class);
+    }
+
 }

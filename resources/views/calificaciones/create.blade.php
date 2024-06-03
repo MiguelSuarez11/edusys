@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Calificacion')
 
 @section('content_header')
-<h2 class="text-xl font-semibold leading-tight text-center text-gray-800">
-    {{ __('Crear Calificacion') }}
-</h2>
+    <h2 class="text-xl font-semibold leading-tight text-center text-gray-800">
+        {{ __('Crear Calificacion') }}
+    </h2>
 @stop
 
 @section('content')
@@ -24,7 +24,8 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="post" action="{{ route('profesor.store') }}" role="form" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('profesor.store') }}" role="form"
+                            enctype="multipart/form-data">
                             @csrf
                             @include('calificaciones.form')
                             <div class="box-footer mt20">
@@ -37,5 +38,3 @@
         </div>
     </section>
 @endsection
-
-

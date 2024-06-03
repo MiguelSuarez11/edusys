@@ -90,9 +90,15 @@ class Personal extends Model
         return $this->user->roles();
     }
 
+    public function cursos()
+    {
+        return $this->belongsToMany(Curso::class, 'calificaciones', 'personal_id', 'curso_id');
+    }
 
 
-   
+
+
+
 
     public function estudiantes()
     {
@@ -103,5 +109,5 @@ class Personal extends Model
     {
         return $this->hasMany(Calificacion::class, 'personal_id');
     }
-  
+
 }
