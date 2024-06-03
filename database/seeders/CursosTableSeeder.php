@@ -14,122 +14,122 @@ class CursosTableSeeder extends Seeder
     public function run(): void
     {
         Curso::create([
-            'nombre' => 'Primero a',
-            'nomenclatura' => '1º a',
+            'nombre' => 'Primero A',
+            'nomenclatura' => '1º A',
             'estado' => 1,
         ]);
         Curso::create([
-            'nombre' => 'Primero b',
-            'nomenclatura' => '1º b',
+            'nombre' => 'Primero B',
+            'nomenclatura' => '1º B',
             'estado' => 1,
         ]);
         Curso::create([
-            'nombre' => 'Segundo a',
-            'nomenclatura' => '2º a',
+            'nombre' => 'Segundo A',
+            'nomenclatura' => '2º A',
             'estado' => 1,
         ]);
         Curso::create([
-            'nombre' => 'Segundo b',
-            'nomenclatura' => '2º b',
-            'estado' => 1,
-        ]);
-
-        Curso::create([
-            'nombre' => 'Tercero a',
-            'nomenclatura' => '3º a',
-            'estado' => 1,
-        ]);
-        Curso::create([
-            'nombre' => 'Tercero b',
-            'nomenclatura' => '3º b',
+            'nombre' => 'Segundo B',
+            'nomenclatura' => '2º B',
             'estado' => 1,
         ]);
 
         Curso::create([
-            'nombre' => 'Cuarto a',
-            'nomenclatura' => '4º a',
+            'nombre' => 'Tercero A',
+            'nomenclatura' => '3º A',
             'estado' => 1,
         ]);
         Curso::create([
-            'nombre' => 'Cuarto b',
-            'nomenclatura' => '4º b',
-            'estado' => 1,
-        ]);
-
-        Curso::create([
-            'nombre' => 'Quinto a',
-            'nomenclatura' => '5º a',
-            'estado' => 1,
-        ]);
-        Curso::create([
-            'nombre' => 'Quinto b',
-            'nomenclatura' => '5º b',
+            'nombre' => 'Tercero B',
+            'nomenclatura' => '3º B',
             'estado' => 1,
         ]);
 
         Curso::create([
-            'nombre' => 'Sexto a',
-            'nomenclatura' => '6º a',
+            'nombre' => 'Cuarto A',
+            'nomenclatura' => '4º A',
             'estado' => 1,
         ]);
         Curso::create([
-            'nombre' => 'Sexto b',
-            'nomenclatura' => '6º b',
-            'estado' => 1,
-        ]);
-
-        Curso::create([
-            'nombre' => 'Septimo a',
-            'nomenclatura' => '7º a',
-            'estado' => 1,
-        ]);
-        Curso::create([
-            'nombre' => 'Septimo b',
-            'nomenclatura' => '7º b',
+            'nombre' => 'Cuarto B',
+            'nomenclatura' => '4º B',
             'estado' => 1,
         ]);
 
         Curso::create([
-            'nombre' => 'Octavo a',
-            'nomenclatura' => '8º a',
+            'nombre' => 'Quinto A',
+            'nomenclatura' => '5º A',
             'estado' => 1,
         ]);
         Curso::create([
-            'nombre' => 'Octavo b',
-            'nomenclatura' => '8º b',
-            'estado' => 1,
-        ]);
-
-        Curso::create([
-            'nombre' => 'Noveno a',
-            'nomenclatura' => '9º a',
-            'estado' => 1,
-        ]);
-        Curso::create([
-            'nombre' => 'Noveno b',
-            'nomenclatura' => '9º b',
+            'nombre' => 'Quinto B',
+            'nomenclatura' => '5º B',
             'estado' => 1,
         ]);
 
         Curso::create([
-            'nombre' => 'Decimo a',
-            'nomenclatura' => '10º a',
+            'nombre' => 'Sexto A',
+            'nomenclatura' => '6º A',
             'estado' => 1,
         ]);
         Curso::create([
-            'nombre' => 'Decimo b',
-            'nomenclatura' => '10º b',
+            'nombre' => 'Sexto B',
+            'nomenclatura' => '6º B',
             'estado' => 1,
         ]);
 
         Curso::create([
-            'nombre' => 'Undecimo a',
-            'nomenclatura' => '11º a',
+            'nombre' => 'Septimo A',
+            'nomenclatura' => '7º A',
             'estado' => 1,
         ]);
         Curso::create([
-            'nombre' => 'Undecimo b',
-            'nomenclatura' => '11º b',
+            'nombre' => 'Septimo B',
+            'nomenclatura' => '7º B',
+            'estado' => 1,
+        ]);
+
+        Curso::create([
+            'nombre' => 'Octavo A',
+            'nomenclatura' => '8º A',
+            'estado' => 1,
+        ]);
+        Curso::create([
+            'nombre' => 'Octavo B',
+            'nomenclatura' => '8º B',
+            'estado' => 1,
+        ]);
+
+        Curso::create([
+            'nombre' => 'Noveno A',
+            'nomenclatura' => '9º A',
+            'estado' => 1,
+        ]);
+        Curso::create([
+            'nombre' => 'Noveno B',
+            'nomenclatura' => '9º B',
+            'estado' => 1,
+        ]);
+
+        Curso::create([
+            'nombre' => 'Decimo A',
+            'nomenclatura' => '10º A',
+            'estado' => 1,
+        ]);
+        Curso::create([
+            'nombre' => 'Decimo B',
+            'nomenclatura' => '10º B',
+            'estado' => 1,
+        ]);
+
+        Curso::create([
+            'nombre' => 'Undecimo A',
+            'nomenclatura' => '11º A',
+            'estado' => 1,
+        ]);
+        Curso::create([
+            'nombre' => 'Undecimo B',
+            'nomenclatura' => '11º B',
             'estado' => 1,
         ]);
     }

@@ -36,7 +36,7 @@ class PersonalController extends Controller
      */
     public function create()
     {
-       
+
         $personal = new personal;
         $roles = Role::pluck('name', 'name')->all();
         $generos = vs_genero::pluck('nombre', 'id');
@@ -97,6 +97,8 @@ class PersonalController extends Controller
         $personals = Personal::find($id);
         return view('personal.show', compact('personals'));
     }
+
+ 
 
     /**
      * Show the form for editing the specified resource.

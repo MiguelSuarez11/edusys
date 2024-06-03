@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AssignPermissionsToTeacherSeeder::class);
         $this->call(PeriodoSeeder::class);
         $this->call(AsignaturaSeeder::class);
+        $this->call(EstudiantesSeeder::class);
     }
 }

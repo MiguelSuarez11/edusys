@@ -41,7 +41,7 @@
                         </div>
                         <div class="float-left">
                             <a class="btn btn-info" href="{{ route('calificaciones.create') }}" data-placement="left">
-                                {{ __('Registar Calificacion') }}
+                                {{ __('Registar Calificacions') }}
                             </a>
 
                         </div>

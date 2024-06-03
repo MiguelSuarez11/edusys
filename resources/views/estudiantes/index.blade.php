@@ -40,6 +40,9 @@
                                 <a class="btn btn-primary" href="{{ route('personal.index') }}"> {{ __('Regresar') }}</a>
                             </div>
                             <h1>Mis Calificaciones</h1>
+                            <div class="text-center card-header"><label>Estudiante Seleccionado:</label>
+                                {{ $personal->nombres }}</div>
+
                         </div>
 
                         <div class="card-header">
@@ -62,6 +65,9 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <input type="hidden" id="estudiante_id" name="estudiante_id"
+                                        value="{{ $personal->id }}">
+
                                 </div>
 
                                 <div class="row mt-3">
@@ -114,48 +120,48 @@
             $(document).ready(function() {
                 $('#curso').change(function() {
                     var AsigId = $(this).val();
+                    var estudianteId = $('#estudiante_id')
+                        .val(); // Aquí deberías obtener el ID del estudiante seleccionado
 
-                    if (AsigId) {
+                    if (AsigId && estudianteId) {
                         $.ajax({
-                            url: '/estudiantess/' + AsigId,
+                            url: '/asignaturas/' + AsigId + '/estudiantes/' + estudianteId +
+                                '/calificacion',
                             type: 'GET',
-                            success: function(response) {
+                            success: function(calificacion) {
                                 var estudiantesTable = $('#estudiantes-table tbody');
                                 estudiantesTable.empty();
 
-                                response.forEach(function(estudiante) {
+                                var periodo_1 = calificacion.periodo_1 !== null ? calificacion
+                                    .periodo_1 : 'no definida';
+                                var periodo_2 = calificacion.periodo_2 !== null ? calificacion
+                                    .periodo_2 : 'no definida';
+                                var periodo_3 = calificacion.periodo_3 !== null ? calificacion
+                                    .periodo_3 : 'no definida';
+                                var periodo_4 = calificacion.periodo_4 !== null ? calificacion
+                                    .periodo_4 : 'no definida';
+                                var nombrePersonal = calificacion.personal ? calificacion.personal
+                                    .nombres : 'no definida';
 
-                                    var periodo_1 = estudiante.periodo_1 !== null ?
-                                        estudiante.periodo_1 : 'no definida';
-                                    var periodo_2 = estudiante.periodo_2 !== null ?
-                                        estudiante.periodo_2 : 'no definida';
-                                    var periodo_3 = estudiante.periodo_3 !== null ?
-                                        estudiante.periodo_3 : 'no definida';
-                                    var periodo_4 = estudiante.periodo_4 !== null ?
-                                        estudiante.periodo_4 : 'no definida';
-                                    var nombrePersonal = estudiante.personal ? estudiante
-                                        .personal.nombres : 'no definida';
-                                    estudiantesTable.append(
-                                        '<tr>' +
-                                        '<td>' + estudiante.id + '</td>' +
-                                        '<td>' + nombrePersonal + '</td>' +
-
-                                        '<td>' + periodo_1 + '</td>' +
-                                        '<td>' + periodo_2 + '</td>' +
-                                        '<td>' + periodo_3 + '</td>' +
-                                        '<td>' + periodo_4 + '</td>' +
-                                        '<td>' +
-                                        '<a class="" href="/ruta-a-tu-formulario-de-edicion/' +
-                                        estudiante.id + '">' +
-                                        '<i class="far fa-eye"></i>' +
-                                        '</a>' +
-                                        '</td>' +
-                                        '</tr>'
-                                    );
-                                });
+                                estudiantesTable.append(
+                                    '<tr>' +
+                                    '<td>' + calificacion.id + '</td>' +
+                                    '<td>' + nombrePersonal + '</td>' +
+                                    '<td>' + periodo_1 + '</td>' +
+                                    '<td>' + periodo_2 + '</td>' +
+                                    '<td>' + periodo_3 + '</td>' +
+                                    '<td>' + periodo_4 + '</td>' +
+                                    '<td>' +
+                                    '<a class="" href="/ruta-a-tu-formulario-de-edicion/' +
+                                    calificacion.id + '">' +
+                                    '<i class="far fa-eye"></i>' +
+                                    '</a>' +
+                                    '</td>' +
+                                    '</tr>'
+                                );
                             },
                             error: function() {
-                                alert('Error al obtener los estudiantes');
+                                alert('Error al obtener la calificación del estudiante');
                             }
                         });
                     } else {

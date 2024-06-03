@@ -4,7 +4,7 @@
 
 @section('content_header')
 <h2 class="text-xl font-semibold leading-tight text-center text-gray-800">
-    {{ __('Crear Calificacions') }}
+    {{ __('Crear Calificacion') }}
 </h2>
 @stop
 
@@ -19,14 +19,14 @@
                     <div class="card-header">
                         <span class="card-title">{{ __('') }}</span>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('dashboard') }}"> {{ __('Regresar') }}</a>
+                            <a class="btn btn-primary" href="{{ route('calificaciones.index') }}"> {{ __('Regresar') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
                         <form method="post" action="{{ route('profesor.store') }}" role="form" enctype="multipart/form-data">
                             @csrf
-                            @include('profesor.form')
+                            @include('calificaciones.form')
                             <div class="box-footer mt20">
                                 <button type="submit" class="btn btn-success">{{ __('Guardar') }}</button>
                             </div>

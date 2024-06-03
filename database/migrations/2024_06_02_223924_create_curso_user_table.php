@@ -19,7 +19,7 @@ return new class extends Migration
             // Definir las llaves foráneas
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
+
             // Definir un índice único para evitar duplicados
             $table->unique(['curso_id', 'user_id']);
         });
