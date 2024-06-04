@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Asignatura;
+use App\Models\Evento;
 
 class adminController extends Controller
 {
@@ -20,15 +21,17 @@ class adminController extends Controller
 
     public function index()
     {
-        //  $response = Http::get('https://frasedeldia.azurewebsites.net/api/phrase');
-        //  $data = $response->json();
+         $response = Http::get('https://frasedeldia.azurewebsites.net/api/phrase');
+          $data = $response->json();
         $personalR = Personal::where('estado', 1)->count();
         $users = User::where('estado', 1)->count();
         $cursos = Curso::where('estado', 1)->count();
         $calificacione = Calificacion::where('estado', 1)->count();
         $asistencia = Asistencia::where('estado', 1)->count();
+        $eventos = Evento::all()->count();
 
-        //return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione'));
-        return view('admin.dashboard', compact('personalR', 'users', 'cursos', 'calificacione' , 'asistencia'));
+
+        return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione','eventos'));
+        // return view('admin.dashboard', compact('personalR', 'users', 'cursos', 'calificacione' , 'asistencia'));
     }
 }

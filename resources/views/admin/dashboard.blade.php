@@ -7,13 +7,13 @@
         <h1 class="mb-4">¡Bienvenido al Sistema de Gestion EduSys+!</h1>
         <h5 class="mb-4"> Coordial saludo, <br><b>{{ Auth::user()->name }}</b></h5>
         <div class="card">
-            {{-- <div class="card-body">
+             <div class="card-body">
     <p class="lead">
         -- Frase del dia --<br>
         <b>"{{$data['phrase']}}"</b>
       <p class="text-sm text-muted">Autor: {{$data['author']}}</p>
     </p>
-    </div> --}}
+    </div> 
         @stop
 
         @section('content')
@@ -34,6 +34,11 @@
                     <div class="col-md-3">
                         <x-adminlte-small-box title="Informes" text="informes" icon="fas fa-book text-black" theme="info"
                             url="#" url-text="Ver todos.." />
+                    </div>
+
+                    <div class="col-md-3">
+                        <x-adminlte-small-box title="{{ $eventos }}" text="Eventos" icon="fas fa-address-card text-black"
+                            theme="info" url="{{ route('eventos.index') }}" url-text="Ver todos.." />
                     </div>
                 </div>
             @endcan
@@ -60,11 +65,11 @@
                         <x-adminlte-small-box title="{{ $calificacione }}" text="Calificaciones" icon="fas fa-book text-black"
                             theme="info" url="{{ route('calificaciones.index') }}" url-text="Ver todos.." />
                     </div>
-                    <div class="col-md-3">
-                        <x-adminlte-small-box title="{{ $asistencia }}" text="Asistencia" text="Asistencia"
-                            icon="fas fa-book text-black" theme="info" url="{{ route('asistencia.index') }}"
-                            url-text="Ver todos.." />
-                    </div>
+                        {{-- <div class="col-md-3">
+                            <x-adminlte-small-box title="{{ $asistencia }}" text="Asistencia" text="Asistencia"
+                                icon="fas fa-book text-black" theme="info" url="{{ route('asistencia.index') }}"
+                                url-text="Ver todos.." />
+                        </div> --}}
                 </div>
             @endcan
         @stop

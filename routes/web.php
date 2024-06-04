@@ -6,6 +6,7 @@ use App\Http\Controllers\CalificacionesController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DependentDropdownController;
 use App\Http\Controllers\estudianteController;
+use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\profesorController;
@@ -84,7 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('calificaciones', CalificacionesController::class);
     Route::get('/calificaciones listado', [CalificacionesController::class, 'index_calificaciones'])->name('calificaciones.index_calificaciones');
     Route::put('/calificaciones/{id}', [CalificacionesController::class, 'update'])->name('calificaciones.update');
-
+    Route::resource('eventos', EventoController::class);
 });
 
 
@@ -98,6 +99,8 @@ Route::get('/estudiantess/{AsigId}', [CalificacionesController::class, 'getEstud
 
 // Ruta para obtener la calificación del estudiante en una asignatura específica
 Route::get('/asignaturas/{asigId}/estudiantes/{estudianteId}/calificacion', [CalificacionesController::class, 'getCalificacionEstudiante']);
+
+
 
 
 
