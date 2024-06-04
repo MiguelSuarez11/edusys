@@ -22,9 +22,7 @@
                                     {{ __('Nuevo Curso') }}
                                 </a>
                                 <br><br>
-                                <a href="{{ route('cursos.asignacion') }}" class="float-right btn btn-info btn-sm">
-                                    {{ __('Asignar Curso') }}</a>
-
+                                
                                 <x-adminlte-modal id="modalMin" title="Nuevo Curso" size="sm" theme="info">
                                     <form method="POST" action="{{ route('cursos.store') }}" role="form"
                                         enctype="multipart/form-data">

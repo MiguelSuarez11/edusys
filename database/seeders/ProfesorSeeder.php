@@ -6,10 +6,8 @@ use App\Models\Personal;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
-
-class EstudiantesSeeder extends Seeder
+class ProfesorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -38,8 +36,7 @@ class EstudiantesSeeder extends Seeder
                 'personal_id' => $thirddata['id'],
                 'email' => $faker->unique()->safeEmail,
                 'password' => '1234',
-            ])->assignRole('Estudiante');
+            ])->assignRole('Profesor');
         }
-        
     }
 }

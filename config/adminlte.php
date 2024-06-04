@@ -344,7 +344,7 @@ return [
                 [
                     'text' => 'Asignar Cursos',
                     'icon'    => 'fas fa-id-badge',
-                    'route'  => 'cursos.index',
+                    'route'  => 'cursos.asignacion',
                 ],
 
             ],
