@@ -24,6 +24,7 @@ class AsistenciaController extends Controller
         $validatedData = $request->validate([
             'campo1' => 'required',
             'campo2' => 'required',
+
             // Otros campos y reglas de validación
         ]);
 

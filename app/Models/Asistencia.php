@@ -13,9 +13,9 @@ class Asistencia extends Model
     protected $table = 'asistencias';
 
     protected $fillable = [
-        'campo1',
-        'campo2',
-        'estado', // Agregar la columna 'estado' al array fillable
+        'event',
+        'start_date',
+        'end_date' // Agregar la columna 'estado' al array fillable
     ];
 }
 

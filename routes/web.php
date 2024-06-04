@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/asistencia', [AsistenciaController::class, 'store'])->middleware('auth');
     Route::post('/profesor/store', [CalificacionesController::class, 'store'])->name('profesor.store');
      Route::get('/estudiante', [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
-
+    
 
     Route::get('/profesor/estudiantes/{cursoId}', [CalificacionesController::class, 'getEstudiantes']);
 
@@ -99,6 +99,7 @@ Route::get('/estudiantess/{AsigId}', [CalificacionesController::class, 'getEstud
 
 // Ruta para obtener la calificación del estudiante en una asignatura específica
 Route::get('/asignaturas/{asigId}/estudiantes/{estudianteId}/calificacion', [CalificacionesController::class, 'getCalificacionEstudiante']);
+ //Ruta para assitencias
 
 
 
