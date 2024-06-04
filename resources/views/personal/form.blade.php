@@ -41,8 +41,12 @@
                     <select name="cursos" class="form-control" id="cursos">
                         <option value=""> Seleccion tu Curso</option>
                         @foreach ($cursos as $id => $nombre)
-                            <option value="{{ $id }}" @if ($id == $personal->cursos) selected @endif>
-                                {{ $nombre }}</option>
+                       
+                        <option value="{{ $id }}" @if ($personal->cursos instanceof \Illuminate\Database\Eloquent\Collection && $personal->cursos->contains('id', $id)) selected @endif>
+
+
+                        {{ $nombre }}
+                        </option>
                         @endforeach
                     </select>
                 </div>

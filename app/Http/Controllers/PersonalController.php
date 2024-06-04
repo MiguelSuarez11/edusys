@@ -63,6 +63,9 @@ class PersonalController extends Controller
             return redirect()->back()->with('success', 'Ya existe un personal con este número de documento.');
         }
 
+
+        
+
         // Si no existe, crea el personal
         $data = $request->all();
         $userCorreo = $request['correo'];

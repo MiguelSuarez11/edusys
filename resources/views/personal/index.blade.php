@@ -92,7 +92,7 @@
                                                 <div class="col-md-6">
                                                     <p><b>Apellidos:</b> {{ $personal->apellidos }}</p>
                                                     <p><b>Direccion:</b> {{ $personal->direccion }}</p>
-                                                    <p><b>Genero:</b> {{ $personal->generos->nombre }}</p>
+                                                    <p><b>Genero:</b> {{ $personal->generos }}</p>
                                                     <p><b>estado:</b>
                                                         @if ($personal->estado == 1)
                                                             Activo
