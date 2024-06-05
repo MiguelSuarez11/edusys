@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/asistencia', [AsistenciaController::class, 'store'])->middleware('auth');
     Route::post('/profesor/store', [CalificacionesController::class, 'store'])->name('profesor.store');
      Route::get('/estudiante', [CalificacionesController::class, 'mostrarAsig'])->name('estudent.index');
-    
+
 
     Route::get('/profesor/estudiantes/{cursoId}', [CalificacionesController::class, 'getEstudiantes']);
 
@@ -85,8 +85,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('calificaciones', CalificacionesController::class);
     Route::get('/calificaciones listado', [CalificacionesController::class, 'index_calificaciones'])->name('calificaciones.index_calificaciones');
     Route::put('/calificaciones/{id}', [CalificacionesController::class, 'update'])->name('calificaciones.update');
-    Route::resource('eventos', EventoController::class);
+
 });
+
+
+// RUTA DE EVENTOS 
+Route::resource('eventos', EventoController::class);
 
 
 // Cursos y estudiantes

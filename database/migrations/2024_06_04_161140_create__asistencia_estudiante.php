@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('_asistencia_estudiante', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id')->unsigned();
             $table->string('event');
             $table->dateTime('Start_date');
             $table->datetime('end_date');

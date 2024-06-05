@@ -27,7 +27,7 @@ class CursoController extends Controller
     }
 
 
-   
+
 
 
     /**
@@ -47,10 +47,10 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Curso::$rules);
+       
 
         $curso = Curso::create($request->all());
-
+        dd($curso);
         return redirect()->route('cursos.index')
             ->with('success', 'Curso creado con éxito')
             ->with('title', 'Guardado');

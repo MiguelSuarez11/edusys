@@ -13,7 +13,8 @@ class EventoController extends Controller
     public function index()
     {
         $evento = Evento::all();
-        return view('Evento.index', compact('evento'));
+        $eventos = new Evento();
+        return view('Evento.index', compact('evento' , 'eventos'));
     }
 
     /**
@@ -29,7 +30,15 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $eventos = new Evento();
+        $eventos->Nombre = $request->Nombre;
+        $eventos->Descripcion = $request->Descripcion;
+        $eventos->save();
+
+        return redirect()->route('eventos.index')
+            ->with('success', 'Evento creado con éxito')
+            ->with('title', 'Guardado');
     }
 
     /**

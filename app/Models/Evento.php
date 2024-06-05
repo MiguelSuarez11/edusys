@@ -9,4 +9,9 @@ class Evento extends Model
 {
     use HasFactory;
     protected $fillable = ['Nombre','Descripcion' , 'Fecha','Hora'];
+
+    static $rules = [
+		'Nombre' => 'required',
+		'Descripcion' => 'required',
+    ];
 }
