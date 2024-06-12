@@ -20,18 +20,29 @@ class CalificacionesController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('can:admin.calificaciones.index')->only('index');
+        $this->middleware('can:admin.calificaciones.index')->only('index_calificaciones');
+        $this->middleware('can:admin.calificaciones.create')->only('create');
+        $this->middleware('can:admin.calificaciones.store')->only('store');
+        $this->middleware('can:admin.calificaciones.show')->only('show');
+        $this->middleware('can:admin.calificaciones.edit')->only('edit');
+        $this->middleware('can:admin.calificaciones.update')->only('update');
+        $this->middleware('can:admin.calificaciones.destroy')->only('destroy');
+    }
     public function index()
     {
+        // Contar los cursos con estado igual a 1
+        $cursosCount = Curso::whereNotNull('estado')->count();
 
+        // Contar las calificaciones con estado igual a 1
+        $calificacionesCount = Calificacion::where('estado', 1)->count();
 
-        $cursos = Curso::where('estado', 1)->count();
-        $calificacione = Calificacion::where('estado', 1)->count();
-
-
-
-        return view('calificaciones.index', compact('cursos', 'calificacione',));
-        //
+        //Retornar la vista
+        return view('calificaciones.index', compact('cursosCount', 'calificacionesCount'));
     }
+
 
 
     public function index_calificaciones()
@@ -42,11 +53,7 @@ class CalificacionesController extends Controller
         $asignaturas = Asignatura::all();
         $estudiantes = User::with('personal');
         $calificaciones = calificacione::all()->where('estado', 1);
-
         return view('calificaciones.list', compact('cursos', 'asignaturas', 'estudiantes', 'personal', 'calificaciones', 'tiposCursos'))->with('user', auth()->user());
-
-
-        //
     }
 
     /**
@@ -54,18 +61,16 @@ class CalificacionesController extends Controller
      */
     public function create()
     {
-
         $calificacions = new Calificacione();
         $cursos = Curso::all();
         $periodos = Periodo::pluck('nombre', 'id');
         $asignaturas = Asignatura::pluck('nombre', 'id');
         return view('calificaciones.create', compact('cursos', 'calificacions', 'asignaturas', 'periodos'))->with('user', auth()->user());
     }
+
     public function mostrarAsig($id, User $user)
     {
-
         $personal = Personal::findOrFail($id);
-
         //Muestra de notas a los estudiantes
         $asignaturas = Asignatura::all();
         $estudiantes = User::with('personal');
@@ -279,13 +284,14 @@ class CalificacionesController extends Controller
     {
         $calificacion = Calificacione::find($id);
         $user = Auth::user();
+        $persona = Personal::find($id);
         $asignaturas = Asignatura::pluck('nombre', 'id');
         $periodos = Periodo::pluck('nombre', 'id');
         $estudiantes = Personal::whereHas('cursos', function ($query) use ($calificacion) {
             $query->where('curso_id', $calificacion->curso_id);
         })->get();
 
-        return view('calificaciones.edit', compact('calificacion', 'user', 'asignaturas', 'periodos', 'estudiantes'));
+        return view('calificaciones.edit', compact('persona', 'calificacion', 'user', 'asignaturas', 'periodos', 'estudiantes'));
     }
 
 

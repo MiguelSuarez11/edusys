@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    
+
 
     public function up(): void
     {
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('fech_nacimiento')->nullable();
             $table->string('genero')->nullable();
             $table->unsignedSmallInteger('cursos');
-            $table->foreign('cursos')->references('id')->on('cursos');
+            $table->foreign('cursos')->references('id')->on('cursos')->onDelete('cascade    ');
             $table->boolean('estado')->default(1);
             $table->timestamps();
         });
@@ -36,6 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('personals');
     }
 };

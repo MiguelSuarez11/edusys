@@ -3,8 +3,8 @@
         <label for="curso">Curso:</label>
         <select name="curso" id="curso" class="form-control">
             <option value="">Seleccionar curso</option>
-            @foreach ($user->cursos as $curso)
-                <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
+            @foreach ($cursos as $curso)
+                <option value="{{ $curso->id }}">{{ $curso->nombre }} </option>
             @endforeach
         </select>
     </div>

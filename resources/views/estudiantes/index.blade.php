@@ -37,7 +37,7 @@
                         <div class="card-header">
                             <span class="card-title">{{ __('') }}</span>
                             <div class="float-right">
-                                <a class="btn btn-primary" href="{{ route('calificaciones.index') }}">
+                                <a class="btn btn-primary" href="{{ route('dashboard') }}">
                                     {{ __('Regresar') }}</a>
                             </div>
                             <h1>Mis Calificaciones</h1>
@@ -71,7 +71,7 @@
 
                                 </div>
 
-                                <div class="row mt-3">
+                                <div class="mt-3 row">
                                     <div class="col-12">
                                         <table class="table table-bordered" id="estudiantes-table">
                                             <thead>
@@ -149,7 +149,7 @@
                                         calificacion.periodo_3).toFixed(1) : 'no definida';
                                     var periodo_4 = calificacion.periodo_4 !== null ? parseFloat(
                                         calificacion.periodo_4).toFixed(1) : 'no definida';
-                                    var nota_final = calificacion.nota_final !== null ?parseFloat(
+                                    var nota_final = calificacion.nota_final !== null ? parseFloat(
                                         calificacion.nota_final).toFixed(1) : 'no definida';
                                     var nombrePersonal = calificacion.personal ? calificacion
                                         .personal.nombres : 'no definida';
@@ -162,7 +162,7 @@
                                         '<td>' + periodo_2 + '</td>' +
                                         '<td>' + periodo_3 + '</td>' +
                                         '<td>' + periodo_4 + '</td>' +
-                                        '<td>' +nota_final + '</td>' +
+                                        '<td>' + nota_final + '</td>' +
                                         '</td>' +
                                         '</tr>'
                                     );

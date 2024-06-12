@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Evento extends Model
 {
     use HasFactory;
-    protected $fillable = ['Nombre','Descripcion' , 'Fecha','Hora'];
+    protected $fillable = ['Nombre','Descripcion' , 'Fecha','Hora' , 'estado'];
 
     static $rules = [
 		'Nombre' => 'required',

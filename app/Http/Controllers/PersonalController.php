@@ -20,6 +20,7 @@ class PersonalController extends Controller
         $this->middleware('can:admin.personal.store')->only('store');
         $this->middleware('can:admin.personal.edit')->only('edit');
         $this->middleware('can:admin.personal.update')->only('update');
+        $this->middleware('can:admin.personal.show')->only('show');
         $this->middleware('can:admin.personal.destroy')->only('destroy');
     }
 
@@ -64,7 +65,7 @@ class PersonalController extends Controller
         }
 
 
-        
+
 
         // Si no existe, crea el personal
         $data = $request->all();
@@ -101,7 +102,7 @@ class PersonalController extends Controller
         return view('personal.show', compact('personals'));
     }
 
- 
+
 
     /**
      * Show the form for editing the specified resource.

@@ -8,7 +8,7 @@ use App\Models\vs_genero;
 use App\Models\Curso;
 use App\Models\Calificacione;
 use App\Models\Asignatura;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Personal
@@ -80,10 +80,12 @@ class Personal extends Model
         return $this->hasMany(Asignatura::class);
     }
 
-    public function curso()
+    public function cursoo()
     {
         return $this->hasOne(Curso::class, 'id', 'cursos');
     }
+
+
 
     public function roles()
     {
@@ -94,6 +96,13 @@ class Personal extends Model
     {
         return $this->belongsToMany(Curso::class, 'calificaciones', 'personal_id', 'curso_id');
     }
+
+
+    public function curso()
+    {
+        return $this->hasMany(Curso::class, 'id', 'id'); // Ajusta las claves si es necesario
+    }
+
 
 
 

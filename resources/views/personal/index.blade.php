@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+    <h2 class="text-xl font-semibold leading-tight text-center text-gray-800">
         {{ __('Lista personal') }}
     </h2>
 @stop
@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="float-right">
-                    <a href="{{route('personal.create')}}" class="btn btn-info btn-sm float-right" data-placement="left">
+                    <a href="{{route('personal.create')}}" class="float-right btn btn-info btn-sm" data-placement="left">
                         {{ __('Crear Personal') }}
                     </a>
 
@@ -45,7 +45,7 @@
                                     <td>{{ $personal->apellidos }}</td>
                                     <td>
                                         @if ($personal->curso)
-                                            {{ $personal->curso->nomenclatura ?? 'Valor Predeterminado' }}
+                                            {{ $personal->cursos->nomenclatura ?? 'Valor Predeterminado' }}
                                         @endif
                                     </td>
                                     <td>
@@ -92,7 +92,7 @@
                                                 <div class="col-md-6">
                                                     <p><b>Apellidos:</b> {{ $personal->apellidos }}</p>
                                                     <p><b>Direccion:</b> {{ $personal->direccion }}</p>
-                                                    <p><b>Genero:</b> {{ $personal->generos }}</p>
+                                                    <p><b>Genero:</b> {{ $personal->generos->nombre }}</p>
                                                     <p><b>estado:</b>
                                                         @if ($personal->estado == 1)
                                                             Activo

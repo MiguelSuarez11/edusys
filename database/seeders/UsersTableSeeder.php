@@ -44,9 +44,17 @@ class UsersTableSeeder extends Seeder
         $user3->assignRole($Profesor);
 
         $permissions = [
+
+            // PERMISOS DE USUARIOS
             'admin.usuarios.index',
+            'admin.usuarios.create',
+            'admin.usuarios.store',
             'admin.usuarios.edit',
+            'admin.usuarios.update',
+            'admin.usuarios.show',
             'admin.usuarios.destroy',
+
+            //PERMISOS DE PERSONAL
             'admin.personal.index',
             'admin.personal.create',
             'admin.personal.edit',
@@ -54,21 +62,73 @@ class UsersTableSeeder extends Seeder
             'admin.personal.update',
             'admin.personal.show',
             'admin.personal.destroy',
+
+            //PERMISOS DE CURSOS
             'admin.cursos.index',
             'admin.cursos.create',
+            'admin.cursos.store',
+            'admin.cursos.show',
             'admin.cursos.edit',
+            'admin.cursos.update',
             'admin.cursos.destroy',
+
+
+
+            //PERMISOS DE ROLES
             'admin.rol.index',
             'admin.rol.create',
             'admin.rol.edit',
+            'admin.rol.store',
+            'admin.rol.show',
+            'admin.rol.update',
             'admin.rol.destroy',
+
+            //PERMISOS DE ASIGNATURAS
             'admin.asignaturas.index',
             'admin.asignaturas.create',
+            'admin.asignaturas.store',
+            'admin.asignaturas.show',
             'admin.asignaturas.edit',
+            'admin.asignaturas.update',
             'admin.asignaturas.destroy',
+
+            //PERMISOS DE CALIFICACIONES
+            'admin.calificaciones.index',
+            'admin.calificaciones.create',
+            'admin.calificaciones.store',
+            'admin.calificaciones.show',
+            'admin.calificaciones.edit',
+            'admin.calificaciones.update',
+            'admin.calificaciones.destroy',
+
+
+
+
+
             'admin.dashboard',
         ];
 
+        ////////////////////////////////////////////////////////////////
+
+        $permissions_profesor = [
+            
+            //PERMISOS DE CALIFICACIONES
+            'admin.calificaciones.index',
+            'admin.calificaciones.create',
+            'admin.calificaciones.store',
+            'admin.calificaciones.show',
+            'admin.calificaciones.edit',
+            'admin.calificaciones.update',
+            'admin.calificaciones.destroy',
+
+
+
+
+            'teacher.dashboard',
+
+        ];
+
+        $Profesor->givePermissionTo($permissions_profesor);
         $adminRole->givePermissionTo($permissions);
     }
 }

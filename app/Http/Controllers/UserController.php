@@ -11,6 +11,16 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('can:admin.usuarios.index')->only('index');
+        $this->middleware('can:admin.usuarios.create')->only('create');
+        $this->middleware('can:admin.usuarios.store')->only('store');
+        $this->middleware('can:admin.usuarios.show')->only('show');
+        $this->middleware('can:admin.usuarios.edit')->only('edit');
+        $this->middleware('can:admin.usuarios.update')->only('update');
+        $this->middleware('can:admin.usuarios.destroy')->only('destroy');
+    }
     public function index()
     {
         $users = User::all();
@@ -39,17 +49,17 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-       // Encuentra el usuario por su ID
-       $users = User::findOrFail($id);
+        // Encuentra el usuario por su ID
+        $users = User::findOrFail($id);
 
-       // Obtén los roles asociados al usuario
-       $rolesuser = $users->roles;
+        // Obtén los roles asociados al usuario
+        $rolesuser = $users->roles;
 
-       // Obtén todos los roles disponibles
-       $roles = Role::all();
+        // Obtén todos los roles disponibles
+        $roles = Role::all();
 
-       // Pasa los datos a la vista
-       return view('users.rol', compact('users', 'roles', 'rolesuser'));
+        // Pasa los datos a la vista
+        return view('users.rol', compact('users', 'roles', 'rolesuser'));
     }
 
     /**

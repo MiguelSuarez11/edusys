@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('personal_id')->references('id')->on('personals');
+            $table->foreign('personal_id')->references('id')->on('personals')->onDelete('cascade');
             $table->boolean('estado')->default(1);
         });
     }

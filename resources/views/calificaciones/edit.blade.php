@@ -34,16 +34,16 @@
                                     <div class="col-3">
                                         <label for="curso">Curso:</label>
                                         <select name="curso" id="curso" class="form-control">
-                                            <option value="" disabled selected>Seleccionar curso</option>
-                                            @foreach ($user->cursos as $curso)
+                                            <option value="" disabled>Seleccionar curso</option>
+                                            @foreach ($persona->curso as $curso)
                                                 <option value="{{ $curso->id }}"
-                                                    {{ old('curso', $calificacion->curso_id) == $curso->id ? 'selected' : '' }}
-                                                    disabled selected>
+                                                    {{ old('curso', $calificacion->curso_id) == $curso->id ? 'selected' : '' }}>
                                                     {{ $curso->nombre }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
+
 
                                     <div class="col-3">
                                         <label for="asignatura">Asignatura:</label>
@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mt-3">
+                                <div class="mt-3 row">
                                     <div class="col-6">
                                         <label for="nota1" class="form-label">Nota 1</label>
                                         <input type="text" class="form-control" id="nota1" name="nota1"
@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mt-3">
+                                <div class="mt-3 row">
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                                     </div>

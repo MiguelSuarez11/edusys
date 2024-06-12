@@ -25,15 +25,16 @@
 
 
                 <div class="col-md-3">
-                    <x-adminlte-small-box title="{{ $calificacione }}" text="Ver Calificaciones" icon="fas fa-book text-black"
+                    <x-adminlte-small-box title="{{ $calificacionesCount }}" text="Ver Calificaciones" icon="fas fa-book text-black"
                         theme="info" url="{{ route('calificaciones.index_calificaciones') }}" url-text="Ver todos.." />
                 </div>
 
                 <div class="col-md-3">
-                    <x-adminlte-small-box title="{{ $calificacione }}" text="Registrar Calificacion"
+                    <x-adminlte-small-box title="{{ $calificacionesCount }}" text="Registrar Calificacion"
                         icon="fas fa-book text-black" theme="info" url="{{ route('calificaciones.create') }}"
                         url-text="Ver todos.." />
                 </div>
+                    
 
             </div>
 

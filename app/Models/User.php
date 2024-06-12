@@ -61,8 +61,5 @@ class User extends Authenticatable
         return $this->belongsTo(Personal::class, 'personal_id', 'id');
     }
 
-    public function cursos(): BelongsToMany
-    {
-        return $this->belongsToMany(Curso::class);
-    }
+   
 }

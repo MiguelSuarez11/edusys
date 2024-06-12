@@ -83,11 +83,9 @@
                                                         </a>
 
                                                         <div class="dropdown-menu">
-                                                            <a type="button" class="dropdown-item text-success"
-                                                                data-toggle="modal"
-                                                                data-target="#modalshow{{ $calificacion->id }}"
-                                                                onclick="Informacion({{ $calificacion->id }})"><i
-                                                                    class="fas fa-eye"></i> Ver informacion</a>
+                                                            <a  href="{{ route('estudiantes.shows', auth()->user()->personal_id) }}" type="button" class="dropdown-item text-success"
+                                                                ><i
+                                                                    class="fas fa-eye"></i> Ver Notas</a>
                                                             <a href="{{ route('calificaciones.edit', $calificacion) }}"
                                                                 type="button" class="dropdown-item text-warning">
                                                                 <i class="fa fa-fw fa-edit"> Editar</i>

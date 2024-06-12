@@ -17,6 +17,17 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('can:admin.rol.index')->only('index');
+        $this->middleware('can:admin.rol.create')->only('create');
+        $this->middleware('can:admin.rol.store')->only('store');
+        $this->middleware('can:admin.rol.show')->only('show');
+        $this->middleware('can:admin.rol.edit')->only('edit');
+        $this->middleware('can:admin.rol.update')->only('update');
+        $this->middleware('can:admin.rol.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $roles = Role::all()->where('estado', '1');

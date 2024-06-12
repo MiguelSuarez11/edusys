@@ -330,6 +330,7 @@ return [
                 ],
             ],
         ],
+
         [
             'text'    => 'Cursos',
             'icon'    => 'fas fa-school',

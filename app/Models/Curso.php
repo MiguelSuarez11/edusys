@@ -57,9 +57,14 @@ class Curso extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    // public function personals()
+    // {
+    //     return $this->hasMany('App\Models\Personal', 'curso_id', 'id');
+    // }
+
     public function personals()
     {
-        return $this->hasMany('App\Models\Personal', 'curso_id', 'id');
+        return $this->hasMany(Personal::class, 'cursos', 'id');
     }
 
     public function calificaciones()
@@ -73,4 +78,8 @@ class Curso extends Model
         return $this->belongsTo(Personal::class);
     }
 
+    public function events()
+    {
+        return $this->hasMany(Agenda::class);
+    }
 }

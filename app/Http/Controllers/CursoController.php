@@ -19,10 +19,24 @@ class CursoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('can:admin.cursos.index')->only('index');
+        $this->middleware('can:admin.cursos.create')->only('create');
+        $this->middleware('can:admin.cursos.store')->only('store');
+        $this->middleware('can:admin.cursos.show')->only('show');
+        $this->middleware('can:admin.cursos.edit')->only('edit');
+        $this->middleware('can:admin.cursos.update')->only('update');
+        $this->middleware('can:admin.cursos.destroy')->only('destroy');
+        $this->middleware('can:admin.calificaciones.index')->only('getCursos');
+        $this->middleware('can:admin.calificaciones.index')->only('getEstudiantes');
+    }
     public function index()
     {
         $cursos = Curso::all();
         $curso = new Curso();
+        // $courses = Curso::all();
+        // return response()->json($courses);
         return view('curso.index', compact('cursos', 'curso'));
     }
 
@@ -39,6 +53,18 @@ class CursoController extends Controller
     {
     }
 
+    public function getCursos()
+    {
+        $cursos = Curso::all();
+        return response()->json($cursos);
+    }
+
+    public function getEstudiantes($cursoId)
+    {
+        $estudiantes = Personal::where('cursos', $cursoId)->get();
+        return response()->json($estudiantes);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -47,7 +73,7 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-       
+
 
         $curso = Curso::create($request->all());
         dd($curso);

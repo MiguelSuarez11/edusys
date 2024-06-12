@@ -12,9 +12,10 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $evento = Evento::all();
+        $evento = Evento::all()->where('estado', 1);
         $eventos = new Evento();
-        return view('Evento.index', compact('evento' , 'eventos'));
+
+        return view('Evento.index', compact('evento', 'eventos'));
     }
 
     /**
@@ -34,6 +35,8 @@ class EventoController extends Controller
         $eventos = new Evento();
         $eventos->Nombre = $request->Nombre;
         $eventos->Descripcion = $request->Descripcion;
+        $eventos->Fecha = $request->Fecha;
+        $eventos->Hora = $request->Hora;
         $eventos->save();
 
         return redirect()->route('eventos.index')
@@ -53,9 +56,11 @@ class EventoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Evento $evento)
+    public function edit($id)
     {
-        //
+        $evento = Evento::find($id);
+
+        return view('Evento.edit', compact('evento'));
     }
 
     /**
@@ -63,14 +68,40 @@ class EventoController extends Controller
      */
     public function update(Request $request, Evento $evento)
     {
-        //
+        request()->validate(Evento::$rules);
+
+        $evento->update($request->all());
+
+        return redirect()->route('eventos.index')
+            ->with('success', 'Evento Editado con éxito')
+            ->with('title', 'Guardado');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Evento $evento)
+    public function destroy($id)
     {
-        //
+        $calificaciones = Evento::find($id);
+
+        if ($calificaciones) {
+            // Verifica si el estado actual es 1
+            if ($calificaciones->estado === 1) {
+                // Estado actual es 1, entonces actualiza a 0
+                $calificaciones->update(['estado' => 0]);
+                return redirect()->route('eventos.index')
+                    ->with('success', 'Evento eliminado con éxito')
+                    ->with('title', 'Eliminado');
+            } else {
+                // Estado actual es 0, entonces actualiza a 1
+                $calificaciones->update(['estado' => 1]);
+                return redirect()->route('eventos.index')
+                    ->with('success', 'Evento activado con éxito')
+                    ->with('title', 'Activado');
+            }
+        } else {
+            return redirect()->route('eventos.index')
+                ->with('error', 'No se encontró el evento');
+        }
     }
 }

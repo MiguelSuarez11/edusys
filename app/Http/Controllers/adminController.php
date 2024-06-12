@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
 use App\Models\Asistencia;
 use App\Models\Calificacion;
 use App\Models\Curso;
@@ -21,17 +22,17 @@ class adminController extends Controller
 
     public function index()
     {
-         $response = Http::get('https://frasedeldia.azurewebsites.net/api/phrase');
-          $data = $response->json();
+        //  $response = Http::get('https://frasedeldia.azurewebsites.net/api/phrase');
+        //   $data = $response->json();
         $personalR = Personal::where('estado', 1)->count();
         $users = User::where('estado', 1)->count();
         $cursos = Curso::where('estado', 1)->count();
         $calificacione = Calificacion::where('estado', 1)->count();
         $asistencia = Asistencia::where('estado', 1)->count();
         $eventos = Evento::all()->count();
+        $agenda = Agenda::all()->count();
 
-
-        return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione','eventos'));
-        // return view('admin.dashboard', compact('personalR', 'users', 'cursos', 'calificacione' , 'asistencia'));
+        //return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione','eventos'));
+         return view('admin.dashboard', compact('agenda','eventos','personalR', 'users', 'cursos', 'calificacione' , 'asistencia'));
     }
 }

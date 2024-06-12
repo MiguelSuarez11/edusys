@@ -10,11 +10,21 @@ class AsignaturasController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('can:admin.asignaturas.index')->only('index');
+        $this->middleware('can:admin.asignaturas.create')->only('create');
+        $this->middleware('can:admin.asignaturas.store')->only('store');
+        $this->middleware('can:admin.asignaturas.show')->only('show');
+        $this->middleware('can:admin.asignaturas.edit')->only('edit');
+        $this->middleware('can:admin.asignaturas.update')->only('update');
+        $this->middleware('can:admin.asignaturas.destroy')->only('destroy');
+    }
     public function index()
     {
         $asignaturas = Asignatura::all();
         $asignatura = new Asignatura();
-      return view('asignaturas.index',compact('asignaturas','asignatura'));
+        return view('asignaturas.index', compact('asignaturas', 'asignatura'));
     }
 
     /**
@@ -35,8 +45,8 @@ class AsignaturasController extends Controller
         $asignatura = Asignatura::create($request->all());
 
         return redirect()->route('asignaturas.index')
-        ->with('success', 'Asignatura creada con éxito')
-        ->with('title', 'Guardado');
+            ->with('success', 'Asignatura creada con éxito')
+            ->with('title', 'Guardado');
     }
 
     /**
@@ -53,8 +63,6 @@ class AsignaturasController extends Controller
     public function edit($id)
     {
         $asignatura = Asignatura::find($id);
-
-        
     }
 
     /**
@@ -67,8 +75,8 @@ class AsignaturasController extends Controller
         $asignaturas->update($request->all());
 
         return redirect()->route('asignaturas.index')
-        ->with('success', 'Asignatura Editada con éxito')
-        ->with('title', 'Guardado');
+            ->with('success', 'Asignatura Editada con éxito')
+            ->with('title', 'Guardado');
     }
 
     /**
@@ -79,7 +87,7 @@ class AsignaturasController extends Controller
         $asignaturas = Asignatura::find($id)->delete();
 
         return redirect()->route('asignaturas.index')
-        ->with('success', 'Asignatura eliminado con éxito')
-        ->with('title', 'Eliminado');
+            ->with('success', 'Asignatura eliminado con éxito')
+            ->with('title', 'Eliminado');
     }
 }

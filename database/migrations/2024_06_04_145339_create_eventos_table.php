@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('Descripcion');
             $table->date('Fecha');
             $table->time('Hora');
+            $table->boolean('estado')->default(1);
 
             $table->timestamps();
         });
@@ -27,6 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('eventos');
     }
 };
