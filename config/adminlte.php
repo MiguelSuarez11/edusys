@@ -350,6 +350,22 @@ return [
 
             ],
         ],
+
+        [
+            'text'    => 'Eventos',
+            'icon'    => 'fas fa-newspaper',
+            'can' => 'admin.eventos.index',
+            'submenu' => [
+                [
+                    'text' => 'Lista de Eventos',
+                    'icon'    => 'fa fa-bars',
+                    'route'  => 'eventos.index',
+                ],
+
+
+            ],
+        ],
+
         [
             'text'    => 'Asignaturas',
             'icon'    => 'fas fa-book',
@@ -364,6 +380,8 @@ return [
 
             ],
         ],
+
+
         ['header' => 'account_settings', 'can' => 'admin.rol.index'],
         [
             'text' => 'Configuraciones',

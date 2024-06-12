@@ -440,5 +440,50 @@ class PermissionsTableSeeder extends Seeder
             'guard_name' => 'web',
             'estado' => 1,
         ]);
+
+        //PERMISO DE EVENTOS
+        Permission::create([
+            'name' => 'admin.eventos.index',
+            'description' => 'Ver Calificaciones',
+            'guard_name' => 'web',
+            'estado' => 1,
+        ]);
+        Permission::create([
+            'name' => 'admin.eventos.create',
+            'description' => 'Crear Calificaciones',
+            'guard_name' => 'web',
+            'estado' => 1,
+        ]);
+        Permission::create([
+            'name' => 'admin.eventos.store',
+            'description' => 'Guardar Calificaciones',
+            'guard_name' => 'web',
+            'estado' => 1,
+        ]);
+        Permission::create([
+            'name' => 'admin.eventos.edit',
+            'description' => 'Editar Calificaciones',
+            'guard_name' => 'web',
+            'estado' => 1,
+        ]);
+        Permission::create([
+            'name' => 'admin.eventos.update',
+            'description' => 'Actualizar Calificaciones',
+            'guard_name' => 'web',
+            'estado' => 1,
+        ]);
+        Permission::create([
+            'name' => 'admin.eventos.show',
+            'description' => 'Ver Calificaciones',
+            'guard_name' => 'web',
+            'estado' => 1,
+        ]);
+
+        Permission::create([
+            'name' => 'admin.eventos.destroy',
+            'description' => 'Eliminar Calificaciones',
+            'guard_name' => 'web',
+            'estado' => 1,
+        ]);
     }
 }

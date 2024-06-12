@@ -5,6 +5,7 @@
 @section('content_header')
 
     @can('admin.dashboard')
+    {{-- si es administrador se muestra esto --}}
     <div class="container text-center">
 
         <h1 class="mb-4">¡Gestion De Eventos!</h1>
@@ -12,6 +13,8 @@
         <div class="card">
     </div>
     @endcan
+
+    {{-- //si es estudiante se muestra esto --}}
     <div class="container text-center">
 
         <h1 class="mb-4">Listado De Eventos!</h1>

@@ -101,6 +101,15 @@ class UsersTableSeeder extends Seeder
             'admin.calificaciones.update',
             'admin.calificaciones.destroy',
 
+            //PERMISOS DE EVENTOS
+            'admin.eventos.index',
+            'admin.eventos.create',
+            'admin.eventos.store',
+            'admin.eventos.show',
+            'admin.eventos.edit',
+            'admin.eventos.update',
+            'admin.eventos.destroy',
+
 
 
 
@@ -111,7 +120,7 @@ class UsersTableSeeder extends Seeder
         ////////////////////////////////////////////////////////////////
 
         $permissions_profesor = [
-            
+
             //PERMISOS DE CALIFICACIONES
             'admin.calificaciones.index',
             'admin.calificaciones.create',
@@ -128,6 +137,25 @@ class UsersTableSeeder extends Seeder
 
         ];
 
+        $permissions_estudiantes = [
+
+            //PERMISOS DE CALIFICACIONES
+            'admin.eventos.index',
+            'admin.eventos.create',
+            'admin.eventos.store',
+            'admin.eventos.show',
+            'admin.eventos.edit',
+            'admin.eventos.update',
+            'admin.eventos.destroy',
+
+
+
+
+            'estudent.dashboard',
+
+        ];
+
+        $prueba->givePermissionTo($permissions_estudiantes);
         $Profesor->givePermissionTo($permissions_profesor);
         $adminRole->givePermissionTo($permissions);
     }

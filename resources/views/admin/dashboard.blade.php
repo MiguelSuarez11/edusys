@@ -3,7 +3,7 @@
 @section('title', 'Pagina - Principal')
 
 @section('content_header')
-    {{-- <div class="container text-center">
+     <div class="container text-center">
         <h1 class="mb-4">¡Bienvenido al Sistema de Gestion EduSys+!</h1>
         <h5 class="mb-4"> Coordial saludo, <br><b>{{ Auth::user()->name }}</b></h5>
         <div class="card">
@@ -13,7 +13,7 @@
         <b>"{{$data['phrase']}}"</b>
       <p class="text-sm text-muted">Autor: {{$data['author']}}</p>
     </p>
-    </div>  --}}
+    </div>
 @stop
 
 @section('content')

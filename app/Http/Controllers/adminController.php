@@ -22,8 +22,8 @@ class adminController extends Controller
 
     public function index()
     {
-        //  $response = Http::get('https://frasedeldia.azurewebsites.net/api/phrase');
-        //   $data = $response->json();
+          $response = Http::get('https://frasedeldia.azurewebsites.net/api/phrase');
+           $data = $response->json();
         $personalR = Personal::where('estado', 1)->count();
         $users = User::where('estado', 1)->count();
         $cursos = Curso::where('estado', 1)->count();
@@ -32,7 +32,7 @@ class adminController extends Controller
         $eventos = Evento::all()->count();
         $agenda = Agenda::all()->count();
 
-        //return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione','eventos'));
-         return view('admin.dashboard', compact('agenda','eventos','personalR', 'users', 'cursos', 'calificacione' , 'asistencia'));
+        return view('admin.dashboard', compact('data', 'personalR', 'users', 'cursos', 'calificacione','eventos'));
+         //return view('admin.dashboard', compact('agenda','eventos','personalR', 'users', 'cursos', 'calificacione' , 'asistencia'));
     }
 }
